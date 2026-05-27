@@ -1,6 +1,6 @@
 # td-plg-skills
 
-Claude Code skills for the Treasure AI Studio PLG playground.
+Skills for the Treasure AI Preview. This Repo is Public. 
 
 ## Skills
 
