@@ -1,14 +1,22 @@
 {
   "name": "td-plg-skills",
-  "description": "Skills for the Treasure AI Preview PLG playground",
   "owner": {
-    "name": "Treasure Data"
+    "name": "Treasure Data",
+    "email": "support@treasuredata.com"
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "description": "Skills for the Treasure AI Preview PLG playground"
   },
   "plugins": [
     {
       "name": "treasure-ai-plg",
-      "source": "./plugins/treasure-ai-plg",
-      "description": "PLG router and onboarding skills for Treasure AI Studio"
+      "description": "Guided-flow router and goal playbooks for the Treasure AI Studio PLG playground",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/parse"
+      ]
     }
   ]
 }

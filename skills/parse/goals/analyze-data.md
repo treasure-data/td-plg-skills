@@ -33,7 +33,7 @@
 
    After the user answers:
    - Tailor terminology, examples, and KPIs to their industry for the rest of the session.
-   - If synthetic data: use the `treasurebikes` database — a sample dataset with customer, order, and product data.
+   - If synthetic data: use pre-loaded sample datasets to explore features.
    - If upload: remind the user to upload via the "+" icon in the chat window and wait for the file attachment before proceeding. If data is already uploaded, use that. Avoid personal or confidential data.
 
 3. **Explore data** — briefly explain what data is available and why it matters before showing tables. Based on the data source answer:
