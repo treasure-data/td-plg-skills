@@ -12,7 +12,20 @@ Plan an email campaign through 4 streamlined steps using FormCard forms, then re
 
    If industry, data source, and/or campaign goal were already provided in the user's initial prompt (or a prior step), **omit those questions** — use those values directly and only ask the remaining questions. If all 3 are already known, skip this step entirely and proceed to Step 1. Otherwise, include only the missing questions in a single AskUserQuestion with `layout: 'form'`:
 
-   **Question 1 — Industry** (single-select, skip if already known):
+   **Question 1 — Campaign goal** (single-select, skip if already known):
+   - Header: "Goal"
+   - Question: "What is the primary goal of this email campaign?"
+   - Options:
+
+     | Label | Description |
+     |-------|-------------|
+     | Drive first purchase | Convert new subscribers or leads into first-time buyers |
+     | Re-engage lapsed users | Win back customers who haven't interacted recently |
+     | Promote a product or offer | Highlight a specific product, sale, or limited-time offer |
+     | Nurture leads | Educate and build trust with prospects over time |
+     | Announce news or event | Share a product launch, event, or company update |
+
+   **Question 2 — Industry** (single-select, skip if already known):
    - Header: "Industry"
    - Question: "What industry are you in?"
    - Options:
@@ -27,7 +40,7 @@ Plan an email campaign through 4 streamlined steps using FormCard forms, then re
      | D2C | |
      | B2B Tech | |
 
-   **Question 2 — Data source** (single-select, skip if already known):
+   **Question 3 — Data source** (single-select, skip if already known):
    - Header: "Data"
    - Question: "Which data source should we work with?"
    - Options:
@@ -36,19 +49,6 @@ Plan an email campaign through 4 streamlined steps using FormCard forms, then re
      |-------|-------------|
      | Synthetic data | Use pre-loaded sample datasets to explore features |
      | Upload my own data | Import CSV, JSON, or other files |
-
-   **Question 3 — Campaign goal** (single-select, skip if already known):
-   - Header: "Goal"
-   - Question: "What is the primary goal of this email campaign?"
-   - Options:
-
-     | Label | Description |
-     |-------|-------------|
-     | Drive first purchase | Convert new subscribers or leads into first-time buyers |
-     | Re-engage lapsed users | Win back customers who haven't interacted recently |
-     | Promote a product or offer | Highlight a specific product, sale, or limited-time offer |
-     | Nurture leads | Educate and build trust with prospects over time |
-     | Announce news or event | Share a product launch, event, or company update |
 
    After the user answers:
    - Tailor terminology, examples, and KPIs to their industry for the rest of the session.
