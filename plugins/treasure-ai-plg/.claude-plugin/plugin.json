@@ -1,0 +1,5 @@
+{
+  "name": "treasure-ai-plg",
+  "description": "PLG router and onboarding skills for Treasure AI Studio. The router classifies user intent and dispatches to goal playbooks; onboarding handles first-run setup.",
+  "version": "1.0.0"
+}
