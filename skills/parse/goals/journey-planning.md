@@ -37,7 +37,7 @@ Plan a CDP customer journey in 5 steps: setup via FormCard, generate a skeleton 
 
    After the user answers:
    - Tailor terminology, examples, and KPIs to their industry for the rest of the session.
-   - If synthetic data: use the `treasurebikes` database — a sample dataset with customer, order, and product data.
+   - If synthetic data: use pre-loaded sample datasets to explore features.
    - If upload: remind the user to upload via the "+" icon in the chat window and wait for the file attachment before proceeding. If data is already uploaded, use that. Avoid personal or confidential data.
 
 3. **Five steps**: Setup (FormCard) → Skeleton YAML → Build out stages → Refine outcomes → Summary artifact.

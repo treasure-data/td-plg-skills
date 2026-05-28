@@ -10,17 +10,20 @@ Claude Code skill marketplace for the Treasure AI Preview. This Repo is Public.
 
 ## Plugin: treasure-ai-plg
 
-PLG router and onboarding skills for Treasure AI Studio.
+Guided-flow router and goal playbooks for the Treasure AI Studio PLG playground.
 
 ### Skills
 
-- **`plg-router`** — guided-flow controller. Runs first on every user message, classifies intent (Strong / Medium / None), and dispatches to the matching playbook.
-- **`onboarding`** — first-run welcome and goal-picker flow. Invoked by `plg-router` when a first-run user has no clear intent, or when the user types `/onboarding`.
+- **`parse`** — guided-flow controller. Runs first on every user message, classifies intent (Strong / Medium / None), and dispatches to the matching goal playbook.
 
-### Shared content
+### Goals
 
-- **`goals/`** — playbook bodies (analyze-data, find-segment, journey-planning, campaign-planning, generate-report, explore).
-- **`shared/`** — shared question templates and the setup-complete breadcrumb.
+- **analyze-data** — explore and analyze customer data
+- **campaign-planning** — plan a CDP marketing campaign
+- **find-segment** — find and define a customer segment
+- **journey-planning** — plan a CDP customer journey
+- **learn-about-treasure-ai** — answer questions about Treasure AI
+- **general-questions** — handle off-topic questions with a nudge back
 
 ### Routing model
 
@@ -28,20 +31,22 @@ PLG router and onboarding skills for Treasure AI Studio.
 |--------|---------|--------|
 | Strong | User asks for a concrete artifact | Dispatch directly into the matching goal |
 | Medium | User asks conceptually about a goal-relevant topic | Brief answer + AskUserQuestion offering the playbook |
-| None | Off-topic / generic | Answer + soft inline nudge to onboarding |
+| None | Off-topic / generic | Answer + soft inline nudge |
 
 ## Repository structure
 
 ```
 .claude-plugin/
 └── marketplace.json
-plugins/
-└── treasure-ai-plg/
-    ├── .claude-plugin/
-    │   └── plugin.json
-    └── skills/
-        ├── plg-router/
-        ├── onboarding/
-        ├── goals/
-        └── shared/
+skills/
+└── parse/
+    ├── SKILL.md
+    ├── topic-map.md
+    └── goals/
+        ├── analyze-data.md
+        ├── campaign-planning.md
+        ├── find-segment.md
+        ├── general-questions.md
+        ├── journey-planning.md
+        └── learn-about-treasure-ai.md
 ```

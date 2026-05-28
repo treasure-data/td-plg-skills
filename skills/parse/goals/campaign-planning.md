@@ -37,7 +37,7 @@ Plan an email campaign through 5 streamlined steps using FormCard forms, then re
 
    After the user answers:
    - Tailor terminology, examples, and KPIs to their industry for the rest of the session.
-   - If synthetic data: use the `treasurebikes` database — a sample dataset with customer, order, and product data.
+   - If synthetic data: use pre-loaded sample datasets to explore features.
    - If upload: remind the user to upload via the "+" icon in the chat window and wait for the file attachment before proceeding. If data is already uploaded, use that. Avoid personal or confidential data.
 
 3. **Walk the user through 5 streamlined steps (plus review and artifact generation).** Each step uses a single AskUserQuestion with `layout: 'form'` so the user sees all related questions at once and can adjust pre-filled defaults.
@@ -181,7 +181,7 @@ For Media:
 - Suggest 1–3 child segments with rule definitions **grounded in the actual data** (e.g., "Customers with 3+ orders" only if an `order_count` column exists). Do not add a "Custom audience" or similar freeform option — rely on the built-in "Other" option instead.
 
 **Conditional behavior by data source:**
-- **Synthetic data**: Reference concrete `treasurebikes` tables and columns.
+- **Synthetic data**: Reference concrete tables and columns from the sample datasets.
 - **Upload my own data**: Inspect the uploaded file's columns and map them to segment attributes. If no file is uploaded yet, remind the user to upload via the "+" icon and wait.
 
 If "Other" is selected, ask one free-text follow-up for their targeting criteria.
