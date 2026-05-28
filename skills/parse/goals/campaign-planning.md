@@ -69,6 +69,10 @@ The initial `.md` file should contain:
 ```markdown
 # [Campaign Name] — Campaign Plan
 
+## Next Steps
+- [ ] Define audience segments
+- [ ] Design email template
+
 ## Campaign Overview
 - **Goal:** [selected goal]
 - **KPI:** [auto-generated KPI based on goal + industry]
@@ -81,10 +85,6 @@ The initial `.md` file should contain:
 
 ## Campaign Direction
 [2-3 sentences outlining the strategic direction based on goal + industry]
-
-## Next Steps
-- [ ] Define audience segments
-- [ ] Design email template
 
 ---
 *Draft generated during campaign planning. This document will be updated with full details after all steps are complete.*

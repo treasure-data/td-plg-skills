@@ -72,6 +72,10 @@
    ```markdown
    # [Analysis Name] — Analysis Brief
 
+   ## Next Steps
+   - [ ] Execute analysis queries
+   - [ ] Summarize findings
+
    ## Overview
    - **Purpose:** [selected analysis purpose]
    - **Industry:** [selected industry]
@@ -91,10 +95,6 @@
 
    ## Analysis Direction
    [2–3 sentences outlining the analytical direction based on purpose + approach + data]
-
-   ## Next Steps
-   - [ ] Execute analysis queries
-   - [ ] Summarize findings
 
    ---
    *Draft generated during analysis planning. This document will be updated with results.*
