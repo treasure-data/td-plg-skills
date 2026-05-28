@@ -1,17 +1,6 @@
 # Topic → Goal map
 
-Used by `parse` to decide which goal a user's message is about.
-
-## How to match
-
-For each goal below, read its **semantic description** and ask: *"Does the user's message fit this description?"* Use your judgment — the example phrasings are anchors, not a closed list. Synonyms, paraphrases, industry-specific terms, and metaphors all count if the meaning matches.
-
-A user message can match:
-- **One goal** → Medium intent on that goal (or Strong, if they're asking for the artifact).
-- **Multiple goals** → Medium intent. Pick the most specific match, or ask the user which they meant.
-- **No goal** → None intent. Use the generic fallback nudge.
-
-When in doubt between None and Medium, **default to Medium** — better to over-offer a playbook than leave the user with no path forward.
+Per-goal matching data used by `parse` to classify user messages. For classification rules (Strong / Medium / None) and decision logic, see `SKILL.md`.
 
 ---
 
@@ -128,28 +117,3 @@ When in doubt between None and Medium, **default to Medium** — better to over-
 
 **Nudge:** *By the way, if you're curious about what Treasure AI can do with your customer data — just ask!*
 
----
-
-## None-intent fallback
-
-This should be rare now that general-questions and learn-about-treasure-ai cover most previously-unmatched messages. Use this fallback only for completely unintelligible or empty messages:
-
-> *If you'd like to explore what Treasure AI can do, just ask — I'm here to help.*
-
----
-
-## Disambiguation guide
-
-When a message could fit multiple goals, use these rules:
-
-- **One message vs. a sequence of messages** → campaign (one) vs. journey (sequence).
-- **Defining a group vs. acting on a group** → find-segment (defining) vs. journey-planning / campaign-planning (acting).
-- If still ambiguous, treat as Medium and ask the user which direction they want.
-
-## "What is X?" rule
-
-Any "What is X?" / "What's a X?" / "Define X" / "What does X mean?" question, where X is a concept that fits one of the goal descriptions above, is **always Medium intent** on that goal — even if X isn't in the example phrasings list. Use your judgment about whether X belongs to a goal's domain.
-
-## Comparison rule
-
-Any "What's the difference between X and Y?" / "X vs Y" / "How does X compare to Y?" question, where X or Y fits a goal description, is **always Medium intent** on that goal. If X and Y span two different goals, pick the more specific one or ask the user.

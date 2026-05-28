@@ -8,9 +8,11 @@ Plan a CDP customer journey in 5 steps: setup via FormCard, generate a skeleton 
 
 1. **Greet the user** — acknowledge their goal ("journey planning"). Be concise and action-oriented. **Clearly state that this flow is for demo purposes only and no changes will be made to any data — the result is a plan preview only.**
 
-2. **Ask industry & data source** — use a single AskUserQuestion with `layout: 'form'` containing 2 questions:
+2. **Ask industry & data source** — before the form, briefly explain what journey orchestration involves (1–2 sentences).
 
-   **Question 1 — Industry** (single-select):
+   If industry and/or data source were already provided in the user's initial prompt (or a prior step), **omit those questions** — use those values directly and only ask the remaining questions. If both are already known, skip this step entirely and proceed to Step 1 (Journey Setup). Otherwise, include only the missing questions in a single AskUserQuestion with `layout: 'form'`:
+
+   **Question 1 — Industry** (single-select, skip if already known):
    - Header: "Industry"
    - Question: "What industry are you in?"
    - Options:
@@ -25,7 +27,7 @@ Plan a CDP customer journey in 5 steps: setup via FormCard, generate a skeleton 
      | D2C | |
      | B2B Tech | |
 
-   **Question 2 — Data source** (single-select):
+   **Question 2 — Data source** (single-select, skip if already known):
    - Header: "Data"
    - Question: "Which data source should we work with?"
    - Options:
@@ -46,9 +48,9 @@ Plan a CDP customer journey in 5 steps: setup via FormCard, generate a skeleton 
 
 Briefly explain what a customer journey is and what we need to configure (1–2 sentences): *"A customer journey is an automated sequence of messages and actions triggered by customer behavior. We'll define the type of journey, who enters it, and which channels to use."*
 
-Use a single AskUserQuestion with `layout: 'form'` containing 3 questions:
+If journey type was already provided in the user's initial prompt, **omit that question** — use that value directly and only ask the remaining questions. Include only the missing questions in a single AskUserQuestion with `layout: 'form'`:
 
-**Question 1 — Journey type** (single-select):
+**Question 1 — Journey type** (single-select, skip if already known):
 - Header: "Type"
 - Question: "What type of customer journey would you like to plan?"
 - Options:

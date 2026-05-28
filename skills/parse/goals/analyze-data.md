@@ -4,7 +4,9 @@
 
 1. **Greet the user** — acknowledge their goal ("analyze data") and output preference. Be concise and action-oriented.
 
-2. **Ask industry & data source** — use a single AskUserQuestion with `layout: 'form'` containing 2 questions:
+2. **Ask industry, data source & analysis purpose** — if industry, data source, or analysis purpose were already provided in the user's initial prompt (or a prior step), **omit those questions** — use those values directly and only ask the remaining questions. If the user's stated purpose is vague, ask a clarifying question about the analysis goal instead of showing the full options. If all three are known, skip the form entirely.
+
+   Otherwise, use a single AskUserQuestion with `layout: 'form'` containing up to 3 questions (omitting any already known):
 
    **Question 1 — Industry** (single-select):
    - Header: "Industry"
@@ -31,29 +33,30 @@
      | Synthetic data | Use pre-loaded sample datasets to explore features |
      | Upload my own data | Import CSV, JSON, or other files |
 
-   After the user answers:
-   - Tailor terminology, examples, and KPIs to their industry for the rest of the session.
-   - If synthetic data: use pre-loaded sample datasets to explore features.
-   - If upload: remind the user to upload via the "+" icon in the chat window and wait for the file attachment before proceeding. If data is already uploaded, use that. Avoid personal or confidential data.
-
-3. **Explore data** — briefly explain what data is available and why it matters before showing tables. Based on the data source answer:
-   - Synthetic data: list available tables in the database and describe their schemas (table names, key columns). Skip row counts, column distributions, and data quality checks — defer those to the analysis execution step.
-   - Upload my own data: wait for file upload, then inspect the file structure (columns, types). Skip row counts.
-
-4. **Ask analysis purpose** — explain why knowing the goal matters (the same data can answer very different questions depending on intent). Use AskUserQuestion with:
+   **Question 3 — Analysis purpose** (single-select):
+   - Header: "Purpose"
    - Question: "What would you like to learn from your data?"
-   - Single-select, options:
+   - Options:
+
      | Label | Description |
      |-------|-------------|
      | Understand my customers | Who they are, what they do, and why |
      | Track performance | Measure KPIs, trends, or campaign results |
      | Find opportunities | Discover growth areas, segments, or patterns |
 
-   If the user selects "Other", ask a free-text follow-up using AskUserQuestion.
+   If the user selects "Other" for the analysis purpose, ask a free-text follow-up using AskUserQuestion.
 
-   Use the selected purpose to guide step 5 (analysis approach suggestions) and step 7 (result framing).
+   After the user answers:
+   - Tailor terminology, examples, and KPIs to their industry for the rest of the session.
+   - If synthetic data: use pre-loaded sample datasets to explore features.
+   - If upload: remind the user to upload via the "+" icon in the chat window and wait for the file attachment before proceeding. If data is already uploaded, use that. Avoid personal or confidential data.
+   - Use the selected purpose to guide data exploration (step 3), analysis approach suggestions (step 3), and result framing (step 5).
 
-5. **Suggest analysis approaches** — explain what an analysis approach is and why you're recommending these specific ones. Based on the user's analysis purpose and industry, offer 2–3 concrete analysis ideas. Use AskUserQuestion to let them pick or describe their own. Examples by industry:
+3. **Explore data + suggest analysis approaches** — briefly explain what data is available and why it matters before showing tables. Focus the exploration on tables and columns most relevant to the user's analysis purpose. Based on the data source:
+   - Synthetic data: list available tables in the database and describe their schemas (table names, key columns). Skip row counts, column distributions, and data quality checks — defer those to the analysis execution step.
+   - Upload my own data: wait for file upload, then inspect the file structure (columns, types). Skip row counts.
+
+   Then, based on the user's analysis purpose, industry, and the actual data available, suggest 2–3 concrete analysis approaches **grounded in the data** (e.g., only suggest basket analysis if transaction-level purchase data exists). Explain what an analysis approach is and why you're recommending these specific ones. Use AskUserQuestion to let the user pick an approach or describe their own. Examples by industry:
    - Retail: basket analysis, customer lifetime value, seasonal trends
    - CPG: brand switching, promotion lift, channel mix
    - Travel: booking funnel, destination affinity, loyalty tier analysis
@@ -62,12 +65,54 @@
    - D2C: cohort retention, acquisition channel ROI, repeat purchase rate
    - B2B Tech: pipeline velocity, product adoption, expansion revenue
 
-6. **Execute analysis** — before running analysis queries, check row counts for the tables being used to inform result assessment. Then run queries, compute metrics, and build the output.
+   **Generate analysis brief:** after the user selects an approach, generate a markdown file named `[analysis-name]-brief.md` (auto-generated from purpose + industry, e.g., `retail-customer-ltv-brief.md`). Write to the working directory and open with `mcp__tdx-studio__open_file`. Tell the user: "I've created an initial analysis brief. We'll update it with results as we go."
 
-7. **Deliver results** — present the analysis results as a written summary with key takeaways. Include a data table when the analysis benefits from showing specific numbers. If the task produces a deliverable file, call `mcp__tas__open_file` to display it.
+   Initial brief template:
+
+   ```markdown
+   # [Analysis Name] — Analysis Brief
+
+   ## Overview
+   - **Purpose:** [selected analysis purpose]
+   - **Industry:** [selected industry]
+   - **Data Source:** [selected data source]
+   - **Approach:** [selected analysis approach]
+
+   ## Industry Context
+   [1–2 sentences on industry-specific analysis context]
+
+   ## Data Schema
+   ### [Table/File Name]
+   | Column | Type | Description |
+   |--------|------|-------------|
+   | ... | ... | ... |
+
+   [Repeat for each relevant table/file]
+
+   ## Analysis Direction
+   [2–3 sentences outlining the analytical direction based on purpose + approach + data]
+
+   ## Next Steps
+   - [ ] Execute analysis queries
+   - [ ] Summarize findings
+
+   ---
+   *Draft generated during analysis planning. This document will be updated with results.*
+   ```
+
+   This brief is a **living document** — update it progressively in subsequent steps as more information is gathered.
+
+4. **Execute analysis** — before running analysis queries, check row counts for the tables being used to inform result assessment. Then run queries, compute metrics, and build the output.
+
+   **Update the brief:** add a `## Results` section with the computed metrics, key data points, and any intermediate findings. Check off "Execute analysis queries" in Next Steps.
+
+5. **Deliver results** — present the analysis results as a written summary with key takeaways. Include a data table when the analysis benefits from showing specific numbers.
+
+   **Update the brief (final):** add a `## Key Takeaways` section with the summary findings and actionable recommendations. Replace the Next Steps checklist with a completion note. Update the footer to mark the brief as finalized. Open the completed brief with `mcp__tdx-studio__open_file`.
 
 ## Behavior
 
+- **Living brief** — generate the analysis brief early and update it progressively after each step. The user should always have a current artifact reflecting everything gathered so far.
 - **Explain before asking** — before each question or decision point, briefly explain the concept and why it matters. Assume the user is new to data analysis. Keep explanations concise (1–2 sentences).
 - Ask one question at a time. Do not overwhelm the user.
 - Proactively suggest next steps after each deliverable.
