@@ -41,7 +41,6 @@ Guided-flow router and goal playbooks for the Treasure AI Studio PLG playground.
 skills/
 └── parse/
     ├── SKILL.md
-    ├── topic-map.md
     └── goals/
         ├── analyze-data.md
         ├── campaign-planning.md
