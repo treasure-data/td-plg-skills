@@ -10,8 +10,8 @@
   },
   "plugins": [
     {
-      "name": "preview-skills",
-      "description": "Guided-flow router and goal playbooks for the Treasure AI Studio PLG playground",
+      "name": "treasure-ai-plg",
+      "description": "Guided playbooks for Treasure AI Studio's Preview App",
       "source": "./",
       "strict": false,
       "skills": [
