@@ -1,0 +1,14 @@
+{
+  "name": "td-plg-skills",
+  "description": "Skills for the Treasure AI Preview PLG playground",
+  "owner": {
+    "name": "Treasure Data"
+  },
+  "plugins": [
+    {
+      "name": "treasure-ai-plg",
+      "source": "./plugins/treasure-ai-plg",
+      "description": "PLG router and onboarding skills for Treasure AI Studio"
+    }
+  ]
+}
