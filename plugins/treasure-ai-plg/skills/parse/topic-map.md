@@ -1,6 +1,6 @@
 # Topic → Goal map
 
-Used by `plg-router` to decide which goal a user's message is about.
+Used by `parse` to decide which goal a user's message is about.
 
 ## How to match
 
@@ -51,8 +51,6 @@ When in doubt between None and Medium, **default to Medium** — better to over-
 **Strong-intent signal:** asking to *draft / write / plan / design* a campaign for a specific goal/audience.
 
 **Distinguishing from journey-planning:** if the focus is one message → campaign. If the focus is the *sequence* of messages → journey.
-**Distinguishing from generate-report:** "How is my campaign performing?" → generate-report (measurement), not campaign-planning (creation).
-
 **Nudge:** *If you'd like, I can help you plan a sample email campaign with realistic targets — just ask.*
 
 ---
@@ -92,56 +90,51 @@ When in doubt between None and Medium, **default to Medium** — better to over-
 
 **Strong-intent signal:** asking to *show / chart / analyze / explore* a specific dataset or relationship.
 
-**Distinguishing from generate-report:** analyze = open-ended exploration. Report = fixed structure with KPIs and time period.
-
 **Nudge:** *If you'd like, I can run a quick analysis on the sample data to make this concrete — just ask.*
 
 ---
 
-## generate-report
+## learn-about-treasure-ai
 
-**What it covers:** structured reporting — KPIs, dashboards, executive summaries, performance reviews, periodic reporting (weekly/monthly/quarterly), the difference between metrics and KPIs, how to present results to stakeholders.
+**What it covers:** questions about Treasure AI, the platform, its features, capabilities, pricing, how it works, what it does, comparisons with other CDPs or marketing tools.
 
-**A message fits this goal if** the user is asking about measuring performance against defined metrics, packaging insights for an audience, or anything involving the words KPI / dashboard / report / scorecard.
+**A message fits this goal if** the user is asking about Treasure AI itself — what it is, what it can do, how it compares, pricing, or any product-level question.
 
 **Example phrasings:**
-- "report" / "dashboard" / "scorecard" / "executive summary"
-- "KPI" / "metric" / "metrics overview" / "what should I track"
-- "weekly / monthly / quarterly review" / "QBR"
-- "how is X performing" / "how are we doing" / "performance review"
-- comparisons: "KPI vs metric" / "dashboard vs report"
+- "What is Treasure AI?" / "What does this do?" / "What can you do?"
+- "How does this work?" / "How is this different from Segment?"
+- "Is this free?" / "How does pricing work?" / "What plan do I need?"
+- "What's a CDP?" / "What is AI Studio?"
+- "What features do you have?" / "Can you do X?"
 
-**Strong-intent signal:** asking to *generate / build / put together / compile* a specific report or dashboard for a period.
+**Strong-intent signal:** none — this goal is always Medium or dispatched from None.
 
-**Nudge:** *If you'd like, I can put together a sample performance report on the demo data — just say the word.*
+**Nudge:** *If you'd like, I can show you what Treasure AI can do with a hands-on demo — just pick a topic.*
 
 ---
 
-## explore
+## general-questions
 
-**What it covers:** the user wants to do something hands-on but isn't sure what, or wants a guided tour. This is also the "Explore freely" choice from onboarding.
+**What it covers:** anything that doesn't fit any other goal — truly off-topic, non-marketing, meta, casual, or general knowledge questions.
 
-**A message fits this goal if** the user is gesturing at "show me what's possible" without committing to a specific outcome.
+**A message fits this goal if** the user is asking something unrelated to marketing, data, or Treasure AI. This is the catch-all.
 
 **Example phrasings:**
-- "play around" / "try it out" / "show me what you can do"
-- "tour" / "playground" / "show me around" / "what can this do"
+- "What's the weather?" / "Tell me a joke"
+- "Who built this?" / "What model are you running on?"
+- "Hi" / "Hello" / "What time is it?"
 
-**Nudge:** *If you'd like, I can give you a quick guided tour of what's possible here — just say "show me around".*
+**Strong-intent signal:** none — this goal handles casual and off-topic messages.
+
+**Nudge:** *By the way, if you're curious about what Treasure AI can do with your customer data — just ask!*
 
 ---
 
 ## None-intent fallback
 
-When the user's message **doesn't fit any goal description above** — it's truly off-topic, meta, or generic — use this fallback nudge after answering:
+This should be rare now that general-questions and learn-about-treasure-ai cover most previously-unmatched messages. Use this fallback only for completely unintelligible or empty messages:
 
-> *If you'd like, I can walk you through a quick setup to tailor things to your industry and goals — just say `/onboarding` or "walk me through setup".*
-
-Examples that should use the generic fallback:
-- "Who built this?"
-- "Is this free?" / "How does pricing work?"
-- "What's the weather?" / "Tell me a joke"
-- "What model are you running on?"
+> *If you'd like to explore what Treasure AI can do, just ask — I'm here to help.*
 
 ---
 
@@ -151,8 +144,6 @@ When a message could fit multiple goals, use these rules:
 
 - **One message vs. a sequence of messages** → campaign (one) vs. journey (sequence).
 - **Defining a group vs. acting on a group** → find-segment (defining) vs. journey-planning / campaign-planning (acting).
-- **Open-ended exploration vs. structured measurement** → analyze-data (open) vs. generate-report (structured KPIs).
-- **Creating vs. measuring** → campaign-planning / journey-planning (create) vs. generate-report (measure).
 - If still ambiguous, treat as Medium and ask the user which direction they want.
 
 ## "What is X?" rule

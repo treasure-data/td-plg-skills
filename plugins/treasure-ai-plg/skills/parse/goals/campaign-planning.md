@@ -8,11 +8,39 @@ Plan an email campaign through 5 streamlined steps using FormCard forms, then re
 
 1. **Greet the user** — acknowledge their goal ("campaign planning"). Be concise and action-oriented. **Clearly state that this flow is for demo purposes only and no changes will be made to any data — the result is a plan preview only.**
 
-2. **Ask industry** — follow `shared/ask-industry.md`.
+2. **Ask industry & data source** — use a single AskUserQuestion with `layout: 'form'` containing 2 questions:
 
-3. **Ask data source** — follow `shared/ask-data-source.md`.
+   **Question 1 — Industry** (single-select):
+   - Header: "Industry"
+   - Question: "What industry are you in?"
+   - Options:
 
-4. **Walk the user through 5 streamlined steps (plus review and artifact generation).** Each step uses a single AskUserQuestion with `layout: 'form'` so the user sees all related questions at once and can adjust pre-filled defaults.
+     | Label | Description |
+     |-------|-------------|
+     | Retail | |
+     | CPG | |
+     | Travel | |
+     | Automotive | |
+     | Media | |
+     | D2C | |
+     | B2B Tech | |
+
+   **Question 2 — Data source** (single-select):
+   - Header: "Data"
+   - Question: "Which data source should we work with?"
+   - Options:
+
+     | Label | Description |
+     |-------|-------------|
+     | Synthetic data | Use pre-loaded sample datasets to explore features |
+     | Upload my own data | Import CSV, JSON, or other files |
+
+   After the user answers:
+   - Tailor terminology, examples, and KPIs to their industry for the rest of the session.
+   - If synthetic data: use the `treasurebikes` database — a sample dataset with customer, order, and product data.
+   - If upload: remind the user to upload via the "+" icon in the chat window and wait for the file attachment before proceeding. If data is already uploaded, use that. Avoid personal or confidential data.
+
+3. **Walk the user through 5 streamlined steps (plus review and artifact generation).** Each step uses a single AskUserQuestion with `layout: 'form'` so the user sees all related questions at once and can adjust pre-filled defaults.
 
 ### Step 1: Goal & Success Criteria
 
@@ -32,7 +60,6 @@ Use a single AskUserQuestion with `layout: 'form'` containing 3 questions:
   | Promote a product or offer | Highlight a specific product, sale, or limited-time offer |
   | Nurture leads | Educate and build trust with prospects over time |
   | Announce news or event | Share a product launch, event, or company update |
-  | Custom goal | Describe your own campaign goal |
 
 **Question 2 — Success KPI** (single-select):
 - Header: "KPI"
@@ -55,7 +82,7 @@ Use a single AskUserQuestion with `layout: 'form'` containing 3 questions:
 - allowOther: true
 - defaultOtherText: "Establish a baseline"
 
-After submission, interpret the goal+KPI combination to infer the most relevant measurement approach. If "Custom goal" was selected, ask one free-text follow-up for the goal description.
+After submission, interpret the goal+KPI combination to infer the most relevant measurement approach. If "Other" is selected, ask one free-text follow-up for the goal description.
 
 ### Step 2: Generate Campaign Plan Draft
 
@@ -151,13 +178,13 @@ For Media:
 **Question 2 — Target audience** (multi-select):
 - Header: "Audience"
 - Question: "Which audience segment(s) should receive this campaign?"
-- Suggest 1–3 child segments with rule definitions **grounded in the actual data** (e.g., "Customers with 3+ orders" only if an `order_count` column exists). Plus a "Custom audience" option.
+- Suggest 1–3 child segments with rule definitions **grounded in the actual data** (e.g., "Customers with 3+ orders" only if an `order_count` column exists). Do not add a "Custom audience" or similar freeform option — rely on the built-in "Other" option instead.
 
 **Conditional behavior by data source:**
 - **Synthetic data**: Reference concrete `treasurebikes` tables and columns.
 - **Upload my own data**: Inspect the uploaded file's columns and map them to segment attributes. If no file is uploaded yet, remind the user to upload via the "+" icon and wait.
 
-If "Custom audience" is selected, ask one free-text follow-up for their targeting criteria.
+If "Other" is selected, ask one free-text follow-up for their targeting criteria.
 
 ### Step 4: Email Template
 
@@ -190,7 +217,7 @@ Then use a single AskUserQuestion with `layout: 'form'` containing 4 questions:
   | Last product | Reference their most recent purchase |
   | Loyalty tier | Tier-specific messaging |
 
-  Plus "Add custom variable" option. Tailor to industry and data source.
+  Tailor to industry and data source. Do not add a "Custom variable" or similar freeform option — rely on "Other" instead.
 
 **Question 3 — Email sections** (multi-select):
 - Header: "Layout"
@@ -221,9 +248,8 @@ Then use a single AskUserQuestion with `layout: 'form'` containing 4 questions:
   | Product recommendations | Show different products based on purchase history or preferences |
   | Messaging by segment tier | Different headline/body for VIP vs. regular customers |
   | Regional variations | Different offers or content by geography |
-  | Custom conditions | Describe your own conditional logic |
 
-If "Write my own" (subject) or "Custom conditions" is selected, ask one free-text follow-up for each.
+If "Write my own" (subject) or "Other" (conditions) is selected, ask one free-text follow-up for each.
 
 ### Step 5: Schedule
 

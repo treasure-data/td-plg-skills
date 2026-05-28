@@ -8,11 +8,39 @@ Plan a CDP customer journey in 5 steps: setup via FormCard, generate a skeleton 
 
 1. **Greet the user** — acknowledge their goal ("journey planning"). Be concise and action-oriented. **Clearly state that this flow is for demo purposes only and no changes will be made to any data — the result is a plan preview only.**
 
-2. **Ask industry** — follow `shared/ask-industry.md`.
+2. **Ask industry & data source** — use a single AskUserQuestion with `layout: 'form'` containing 2 questions:
 
-3. **Ask data source** — follow `shared/ask-data-source.md`.
+   **Question 1 — Industry** (single-select):
+   - Header: "Industry"
+   - Question: "What industry are you in?"
+   - Options:
 
-4. **Five steps**: Setup (FormCard) → Skeleton YAML → Build out stages → Refine outcomes → Summary artifact.
+     | Label | Description |
+     |-------|-------------|
+     | Retail | |
+     | CPG | |
+     | Travel | |
+     | Automotive | |
+     | Media | |
+     | D2C | |
+     | B2B Tech | |
+
+   **Question 2 — Data source** (single-select):
+   - Header: "Data"
+   - Question: "Which data source should we work with?"
+   - Options:
+
+     | Label | Description |
+     |-------|-------------|
+     | Synthetic data | Use pre-loaded sample datasets to explore features |
+     | Upload my own data | Import CSV, JSON, or other files |
+
+   After the user answers:
+   - Tailor terminology, examples, and KPIs to their industry for the rest of the session.
+   - If synthetic data: use the `treasurebikes` database — a sample dataset with customer, order, and product data.
+   - If upload: remind the user to upload via the "+" icon in the chat window and wait for the file attachment before proceeding. If data is already uploaded, use that. Avoid personal or confidential data.
+
+3. **Five steps**: Setup (FormCard) → Skeleton YAML → Build out stages → Refine outcomes → Summary artifact.
 
 ### Step 1: Journey Setup
 
@@ -31,7 +59,6 @@ Use a single AskUserQuestion with `layout: 'form'` containing 3 questions:
   | Re-engagement / win-back | Bring back inactive or lapsed customers |
   | Upsell / cross-sell | Drive additional purchases from existing customers |
   | Loyalty program | Reward and retain your best customers |
-  | Custom journey | Describe your own journey scenario |
 
 **Question 2 — Target audience** (free-text):
 - Header: "Audience"
@@ -54,7 +81,7 @@ Use a single AskUserQuestion with `layout: 'form'` containing 3 questions:
   | In-app message | Show messages inside the app |
   | Paid media | Target via advertising platforms |
 
-After submission, if "Custom journey" was selected, ask one free-text follow-up for the scenario description.
+After submission, if "Other" is selected, ask one free-text follow-up for the scenario description.
 
 ### Step 2: Journey Skeleton YAML
 
@@ -140,7 +167,6 @@ Use a single AskUserQuestion with `layout: 'form'` containing 3 questions:
   | Engagement | Customer opens, clicks, or interacts with messages |
   | Retention | Customer stays active and doesn't churn |
   | Revenue | Customer generates measurable revenue lift |
-  | Custom goal | Define your own success metric |
 
 **Question 2 — Timing** (single-select):
 - Header: "Pacing"
@@ -172,7 +198,7 @@ After submission:
 - Add exit criteria or a final fallback branch based on non-responder handling.
 - Update the `.journey.yaml` and call `mcp__tas__open_file` to show the refined diagram.
 
-If "Custom goal" was selected, ask one free-text follow-up for the metric definition.
+If "Other" is selected, ask one free-text follow-up for the metric definition.
 
 ### Step 5: Iterative Refinement Loop
 
