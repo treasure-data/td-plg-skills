@@ -91,7 +91,28 @@
 
    **Update the brief:** add `## Segment Definition` with final criteria, rule logic, estimated size, profile summary, and data sources. Check off "Define segment criteria" and "Estimate segment size".
 
-6. **Deliver results + suggest activation ideas** — generate a CSV file with the segment member list and key attributes, and offer it for download. Proactively suggest activation ideas (campaigns, journeys) for the segment, but clarify these are suggestions for a real implementation — not actions being taken now.
+6. **Ask output format** — use AskUserQuestion (single-select) to ask how the user wants to see the segment results:
+
+   - Header: "Output"
+   - Question: "How would you like to see the segment profile?"
+   - Options:
+
+     | Label | Description |
+     |-------|-------------|
+     | Interactive chart | Visual HTML page with segment donut chart and comparison bars |
+     | Text summary | Written summary with segment details and activation ideas |
+
+7. **Deliver results + suggest activation ideas** — generate a CSV file with the segment member list and key attributes, and offer it for download. Proactively suggest activation ideas (campaigns, journeys) for the segment, but clarify these are suggestions for a real implementation — not actions being taken now.
+
+   **If interactive chart:** generate `[segment-name]-profile.html` — a self-contained HTML page (inline CSS + JS, no external dependencies). Keep the file small and quick to generate — simple inline SVG, minimal JS for hover tooltips. Populate with actual query results, not placeholder data. Include:
+   - **Donut chart**: segment size vs total audience (segment highlighted, remainder muted). Center shows count + percentage.
+   - **Comparison bar charts** (2–3): segment vs overall population on key attributes (e.g., age, purchase frequency, geography). Grouped horizontal bars with hover tooltips.
+   - **Profile card**: styled HTML summary of key characteristics.
+   - **Activation roadmap** (bottom section): horizontal timeline with 2–3 suggested campaign/journey cards — each showing channel icon, campaign name, and one-line description.
+
+   Write the file and open with `mcp__tdx-studio__open_file`.
+
+   **If text summary:** present the segment profile as a written summary with key attributes and activation ideas.
 
    **Update the brief (final):** add `## Activation Ideas` with suggested campaigns/journeys. Replace the Next Steps checklist with a completion note. Update the footer to mark the brief as finalized. Open the completed brief with `mcp__tdx-studio__open_file`.
 
