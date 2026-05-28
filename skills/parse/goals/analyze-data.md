@@ -50,7 +50,7 @@
    - Tailor terminology, examples, and KPIs to their industry for the rest of the session.
    - If synthetic data: use pre-loaded sample datasets to explore features.
    - If upload: remind the user to upload via the "+" icon in the chat window and wait for the file attachment before proceeding. If data is already uploaded, use that. Avoid personal or confidential data.
-   - Use the selected purpose to guide data exploration (step 3), analysis approach suggestions (step 3), and result framing (step 5).
+   - Use the selected purpose to guide data exploration (step 3), analysis approach suggestions (step 3), and result framing (step 6).
 
 3. **Explore data + suggest analysis approaches** — briefly explain what data is available and why it matters before showing tables. Focus the exploration on tables and columns most relevant to the user's analysis purpose. Based on the data source:
    - Synthetic data: list available tables in the database and describe their schemas (table names, key columns). Skip row counts, column distributions, and data quality checks — defer those to the analysis execution step.
@@ -106,7 +106,33 @@
 
    **Update the brief:** add a `## Results` section with the computed metrics, key data points, and any intermediate findings. Check off "Execute analysis queries" in Next Steps.
 
-5. **Deliver results** — present the analysis results as a written summary with key takeaways. Include a data table when the analysis benefits from showing specific numbers.
+5. **Ask output format** — before delivering results, use AskUserQuestion (single-select) to ask how the user wants to see the results:
+
+   - Header: "Output"
+   - Question: "How would you like to see the results?"
+   - Options:
+
+     | Label | Description |
+     |-------|-------------|
+     | Interactive chart | Visual HTML dashboard with hover tooltips |
+     | Data table | Written summary with key takeaways and data table |
+
+6. **Deliver results** — present the analysis results based on the user's output choice.
+
+   **If interactive chart:** generate `[analysis-name]-results.html` — a self-contained HTML page (inline CSS + JS, no external dependencies). Keep the file small and quick to generate — simple inline SVG, minimal JS for hover tooltips. Populate with actual query results, not placeholder data. Match the chart type to the analysis approach:
+
+   | Approach | Chart |
+   |----------|-------|
+   | Basket analysis | Network graph (SVG nodes + edges), hover for lift/support |
+   | CLV | Histogram with percentile markers, hover for count |
+   | Cohort retention | Heatmap grid (rows=cohorts, cols=periods), hover for retention % |
+   | Seasonal trends | Multi-line time series, crosshair hover |
+   | Pipeline velocity | Horizontal funnel, hover for conversion rate + avg days |
+   | Other | Bar or line chart with hover tooltips |
+
+   Include a "Key Takeaways" section below the chart as styled HTML text. Write the file and open with `mcp__tdx-studio__open_file`.
+
+   **If data table:** present the analysis results as a written summary with key takeaways. Include a data table when the analysis benefits from showing specific numbers.
 
    **Update the brief (final):** add a `## Key Takeaways` section with the summary findings and actionable recommendations. Replace the Next Steps checklist with a completion note. Update the footer to mark the brief as finalized. Open the completed brief with `mcp__tdx-studio__open_file`.
 
