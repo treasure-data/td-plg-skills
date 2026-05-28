@@ -55,7 +55,10 @@ The message fits a goal's description, but the user is asking **conceptually** (
 
 The AskUserQuestion is **not optional** for Medium intent. Do not replace it with a plain-text question, a nudge, or skip it.
 
-If the message could fit two goals, pick the more specific match using the disambiguation guide in `topic-map.md`. If still ambiguous, ask the user which direction they want.
+If the message could fit two goals, use these disambiguation rules:
+- **One message vs. a sequence of messages** → campaign (one) vs. journey (sequence).
+- **Defining a group vs. acting on a group** → find-segment (defining) vs. journey-planning / campaign-planning (acting).
+- If still ambiguous, treat as Medium and ask the user which direction they want.
 
 ### No clear intent
 

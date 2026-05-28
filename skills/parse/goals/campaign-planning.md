@@ -1,6 +1,6 @@
 # Goal: Campaign Planning
 
-Plan an email campaign through 5 streamlined steps using FormCard forms, then review and generate artifacts. This is PLANNING ONLY — produce campaign plan artifacts. Do NOT run `tdx` commands, push templates, or deploy campaigns.
+Plan an email campaign through 4 streamlined steps using FormCard forms, then review and generate artifacts. This is PLANNING ONLY — produce campaign plan artifacts. Do NOT run `tdx` commands, push templates, or deploy campaigns.
 
 **This flow is for demo purposes only.** We will NOT make any changes to the demo data or environment. No campaigns, templates, or segments will be created, modified, or deleted. The output is purely a plan/preview document.
 
@@ -8,9 +8,11 @@ Plan an email campaign through 5 streamlined steps using FormCard forms, then re
 
 1. **Greet the user** — acknowledge their goal ("campaign planning"). Be concise and action-oriented. **Clearly state that this flow is for demo purposes only and no changes will be made to any data — the result is a plan preview only.**
 
-2. **Ask industry & data source** — use a single AskUserQuestion with `layout: 'form'` containing 2 questions:
+2. **Ask industry, data source & campaign goal** — before the form, briefly explain what email campaign planning involves and why the goal matters (1–2 sentences).
 
-   **Question 1 — Industry** (single-select):
+   If industry, data source, and/or campaign goal were already provided in the user's initial prompt (or a prior step), **omit those questions** — use those values directly and only ask the remaining questions. If all 3 are already known, skip this step entirely and proceed to Step 1. Otherwise, include only the missing questions in a single AskUserQuestion with `layout: 'form'`:
+
+   **Question 1 — Industry** (single-select, skip if already known):
    - Header: "Industry"
    - Question: "What industry are you in?"
    - Options:
@@ -25,7 +27,7 @@ Plan an email campaign through 5 streamlined steps using FormCard forms, then re
      | D2C | |
      | B2B Tech | |
 
-   **Question 2 — Data source** (single-select):
+   **Question 2 — Data source** (single-select, skip if already known):
    - Header: "Data"
    - Question: "Which data source should we work with?"
    - Options:
@@ -35,58 +37,32 @@ Plan an email campaign through 5 streamlined steps using FormCard forms, then re
      | Synthetic data | Use pre-loaded sample datasets to explore features |
      | Upload my own data | Import CSV, JSON, or other files |
 
+   **Question 3 — Campaign goal** (single-select, skip if already known):
+   - Header: "Goal"
+   - Question: "What is the primary goal of this email campaign?"
+   - Options:
+
+     | Label | Description |
+     |-------|-------------|
+     | Drive first purchase | Convert new subscribers or leads into first-time buyers |
+     | Re-engage lapsed users | Win back customers who haven't interacted recently |
+     | Promote a product or offer | Highlight a specific product, sale, or limited-time offer |
+     | Nurture leads | Educate and build trust with prospects over time |
+     | Announce news or event | Share a product launch, event, or company update |
+
    After the user answers:
    - Tailor terminology, examples, and KPIs to their industry for the rest of the session.
    - If synthetic data: use pre-loaded sample datasets to explore features.
    - If upload: remind the user to upload via the "+" icon in the chat window and wait for the file attachment before proceeding. If data is already uploaded, use that. Avoid personal or confidential data.
+   - If "Other" is selected for the campaign goal, ask one free-text follow-up for the goal description.
 
-3. **Walk the user through 5 streamlined steps (plus review and artifact generation).** Each step uses a single AskUserQuestion with `layout: 'form'` so the user sees all related questions at once and can adjust pre-filled defaults.
+3. **Walk the user through 4 streamlined steps (plus review and artifact generation).** Each step uses a single AskUserQuestion with `layout: 'form'` so the user sees all related questions at once and can adjust pre-filled defaults.
 
-### Step 1: Goal & Success Criteria
+### Step 1: Generate Campaign Plan Draft
 
-Briefly explain what a campaign goal and KPI are (1–2 sentences): *"A campaign goal defines what you want the email to achieve. A KPI (Key Performance Indicator) is the metric you'll use to measure success."*
+Based on the goal, industry, and data source collected so far, generate an initial campaign plan as a markdown file named `[campaign-name]-plan.md`. The campaign name should be auto-generated from the goal + industry (e.g., `retail-first-purchase-plan.md`).
 
-Use a single AskUserQuestion with `layout: 'form'` containing 3 questions:
-
-**Question 1 — Campaign goal** (single-select):
-- Header: "Goal"
-- Question: "What is the primary goal of this email campaign?"
-- Options:
-
-  | Label | Description |
-  |-------|-------------|
-  | Drive first purchase | Convert new subscribers or leads into first-time buyers |
-  | Re-engage lapsed users | Win back customers who haven't interacted recently |
-  | Promote a product or offer | Highlight a specific product, sale, or limited-time offer |
-  | Nurture leads | Educate and build trust with prospects over time |
-  | Announce news or event | Share a product launch, event, or company update |
-
-**Question 2 — Success KPI** (single-select):
-- Header: "KPI"
-- Question: "How will you measure success?"
-- defaultValue: "Conversion rate"
-- Options:
-
-  | Label | Description |
-  |-------|-------------|
-  | Conversion rate | % of recipients who take the desired action |
-  | Open rate | % of recipients who open the email |
-  | Click-through rate | % of recipients who click a link in the email |
-  | Revenue per email | Total revenue generated / emails sent |
-  | Engagement rate | Overall interaction rate (opens + clicks + replies) |
-
-**Question 3 — KPI target** (free-text):
-- Header: "Target"
-- Question: "What is your target for this KPI? (e.g., '15% conversion rate', '25% open rate')"
-- options: [] (empty — renders as text input)
-- allowOther: true
-- defaultOtherText: "Establish a baseline"
-
-After submission, interpret the goal+KPI combination to infer the most relevant measurement approach. If "Other" is selected, ask one free-text follow-up for the goal description.
-
-### Step 2: Generate Campaign Plan Draft
-
-Based on the goal, KPI, target, industry, and data source collected so far, generate an initial campaign plan as a markdown file named `[campaign-name]-plan.md`. The campaign name should be auto-generated from the goal + industry (e.g., `retail-first-purchase-plan.md`).
+**Auto-generate the success KPI and target:** Based on the selected campaign goal and industry, automatically determine the most appropriate success KPI (e.g., conversion rate, open rate, CTR, revenue per email, engagement rate) and a realistic target value. Do not ask the user — infer these from the goal+industry combination.
 
 The initial `.md` file should contain:
 
@@ -95,8 +71,8 @@ The initial `.md` file should contain:
 
 ## Campaign Overview
 - **Goal:** [selected goal]
-- **KPI:** [selected KPI]
-- **Target:** [target value]
+- **KPI:** [auto-generated KPI based on goal + industry]
+- **Target:** [auto-generated realistic target value]
 
 ## Industry Context
 - **Industry:** [selected industry]
@@ -109,7 +85,6 @@ The initial `.md` file should contain:
 ## Next Steps
 - [ ] Define audience segments
 - [ ] Design email template
-- [ ] Set campaign schedule
 
 ---
 *Draft generated during campaign planning. This document will be updated with full details after all steps are complete.*
@@ -117,9 +92,9 @@ The initial `.md` file should contain:
 
 Write this file to the working directory and call `mcp__tdx-studio__open_file` to display it in the artifact panel. Briefly tell the user: "I've created an initial campaign plan draft. We'll fill in the details as we go through the remaining steps."
 
-Then proceed to Step 3 (Audience Segments).
+Then proceed to Step 2 (Audience Segments).
 
-### Step 3: Audience Segments
+### Step 2: Audience Segments
 
 Explore the available data based on the user's industry and data source. Present:
 - A brief explanation of parent and child segments (2–3 sentences): *"A parent segment is your master customer database — it contains all the attributes we can use to target people. A child segment is a specific audience slice carved from the parent using rules and filters."*
@@ -186,7 +161,7 @@ For Media:
 
 If "Other" is selected, ask one free-text follow-up for their targeting criteria.
 
-### Step 4: Email Template
+### Step 3: Email Template
 
 Briefly explain what an email template plan is (1–2 sentences): *"The email template defines the content, structure, and personalization of your email. We'll set up the subject line, merge tags, layout sections, and any conditional content."*
 
@@ -251,58 +226,7 @@ Then use a single AskUserQuestion with `layout: 'form'` containing 4 questions:
 
 If "Write my own" (subject) or "Other" (conditions) is selected, ask one free-text follow-up for each.
 
-### Step 5: Schedule
-
-Briefly explain scheduling considerations (1–2 sentences): *"Campaign scheduling determines when your email goes out. Consider your audience's time zone, optimal send times for your industry, and whether this is a one-time or recurring campaign."*
-
-Use a single AskUserQuestion with `layout: 'form'` containing 3 questions:
-
-**Question 1 — Send type** (single-select):
-- Header: "Frequency"
-- Question: "What type of send schedule do you need?"
-- Options:
-
-  | Label | Description |
-  |-------|-------------|
-  | One-time send | Send once at a specific date and time |
-  | Recurring (daily) | Send daily to new segment members |
-  | Recurring (weekly) | Send weekly on a specific day |
-  | Recurring (monthly) | Send monthly on a specific date |
-  | Triggered | Send when a customer enters the target segment |
-
-**Question 2 — Send time** (single-select):
-- Header: "Time"
-- Question: "What time of day should the email be sent?"
-- defaultValue: pick the industry-appropriate default:
-  - B2B Tech → "Morning (9–10 AM)"
-  - Retail/D2C/CPG → "Midday (12–1 PM)"
-  - Automotive → "Afternoon (3–4 PM)"
-  - Media/Travel → "Evening (7–8 PM)"
-- Options:
-
-  | Label | Description |
-  |-------|-------------|
-  | Morning (9–10 AM) | Best for B2B, news, and informational emails |
-  | Midday (12–1 PM) | Good for retail promotions and lunch-break browsing |
-  | Afternoon (3–4 PM) | Effective for D2C and lifestyle brands |
-  | Evening (7–8 PM) | Strong for entertainment, travel, and leisure |
-  | Custom time | Specify your preferred send time |
-
-**Question 3 — Campaign duration** (single-select):
-- Header: "Duration"
-- Question: "How long should this campaign run?"
-- defaultValue: "Ongoing (no end date)"
-- Options:
-
-  | Label | Description |
-  |-------|-------------|
-  | 1 week | Short promotional burst |
-  | 2 weeks | Standard campaign window |
-  | 1 month | Extended campaign run |
-  | 3 months | Quarterly campaign |
-  | Ongoing (no end date) | Runs until manually stopped |
-
-### Step 6: Review
+### Step 4: Review
 
 Present a structured summary:
 
@@ -322,11 +246,6 @@ Present a structured summary:
 - Email structure (list of sections)
 - Conditional content rules
 
-**Schedule**
-- Send type (one-time / recurring / triggered)
-- Send time
-- Duration (if recurring)
-
 **Campaign Settings**
 - UTM parameters (auto-suggested):
   - utm_source: treasure_data
@@ -343,12 +262,11 @@ Use AskUserQuestion:
   | Looks good — generate the artifacts | Proceed to output generation |
   | Change the audience segments | Go back to segment planning |
   | Change the email template | Go back to template planning |
-  | Change the schedule | Go back to schedule planning |
   | Change the campaign goal | Start over with a new goal |
 
 If the user requests changes, return to the appropriate step. Otherwise proceed to artifact generation.
 
-### Step 7: Generate Final Artifacts
+### Step 5: Generate Final Artifacts
 
 Generate two outputs:
 
@@ -356,7 +274,7 @@ Generate two outputs:
 
 **[campaign-name]-template.html** — a complete, responsive HTML email:
 - Use table-based layout for email client compatibility
-- Include all sections the user selected in Step 4
+- Include all sections the user selected in Step 3
 - Insert merge tag placeholders as `{{profile.variable_name}}`
 - Include conditional content blocks using Liquid syntax where applicable:
   ```html
@@ -376,15 +294,15 @@ The HTML should be a complete, working email template — not a skeleton.
 
 #### Artifact 2: Updated Campaign Plan (.md)
 
-Update the **[campaign-name]-plan.md** file created in Step 2 with all information gathered during the flow. The final `.md` should contain:
+Update the **[campaign-name]-plan.md** file created in Step 1 with all information gathered during the flow. The final `.md` should contain:
 
 ```markdown
 # [Campaign Name] — Campaign Plan
 
 ## Campaign Overview
 - **Goal:** [selected goal]
-- **KPI:** [selected KPI]
-- **Target:** [target value]
+- **KPI:** [auto-generated KPI based on goal + industry]
+- **Target:** [auto-generated realistic target value]
 
 ## Industry Context
 - **Industry:** [selected industry]
@@ -392,7 +310,7 @@ Update the **[campaign-name]-plan.md** file created in Step 2 with all informati
 - **Key considerations:** [industry-specific context]
 
 ## Campaign Direction
-[Strategic direction summary from Step 2, refined with full context]
+[Strategic direction summary from Step 1, refined with full context]
 
 ## Audience
 ### Parent Segment
@@ -412,11 +330,6 @@ For each selected child segment:
 - **Layout sections:** [list of selected sections]
 - **Conditional content:** [type and description, or "None"]
 - **HTML file:** `./[campaign-name]-template.html`
-
-## Schedule
-- **Send type:** [one-time / recurring (daily/weekly/monthly) / triggered]
-- **Send time:** [selected time with timezone]
-- **Duration:** [selected duration]
 
 ## Campaign Settings
 - **UTM Parameters:**
@@ -443,8 +356,8 @@ Write the updated `.md` file and the HTML file to the working directory.
 Use `mcp__tdx-studio__open_file` to display the HTML template in the artifact panel for visual review.
 
 Additionally, deliver in the user's preferred output format (from `[User Preferences]`):
-- **Interactive chart**: generate an HTML summary page showing the complete campaign plan visually (overview, audience flow, template preview, timeline). Open with `mcp__tdx-studio__open_file`.
-- **Data table**: present the plan as structured tables (audience, template, schedule, settings sections).
+- **Interactive chart**: generate an HTML summary page showing the complete campaign plan visually (overview, audience flow, template preview). Open with `mcp__tdx-studio__open_file`.
+- **Data table**: present the plan as structured tables (audience, template, settings sections).
 - **Written summary**: narrative walkthrough of the complete campaign with rationale for each decision.
 
 These are plan artifacts — do NOT run `tdx` commands or push to any server.
@@ -457,13 +370,14 @@ Remind the user at the end: *"This campaign plan is for demo purposes only. No c
 - **Use AskUserQuestion with `layout: 'form'` for multi-question steps** — do NOT split into sequential single questions. Each step should be a single FormCard interaction.
 - Use the `defaultValue` and `defaultOtherText` fields to pre-fill sensible defaults so the user can accept or adjust.
 - **Explain every concept briefly before the form** — assume the user is new to email marketing campaigns. Use plain language first, then show the technical representation.
-- Keep campaign plans realistic — suggest industry-appropriate send times, realistic KPI targets, and sensible segment rules.
+- Keep campaign plans realistic — suggest realistic KPI targets and sensible segment rules.
 - When designing segments, use industry-appropriate attributes and realistic thresholds from the selected data source.
 - When generating HTML email templates, ensure email-client compatibility (table-based layout, inline CSS, email-safe fonts).
 - Include optimization suggestions in the final campaign plan .md file:
-  - A/B test subject lines or send times
+  - A/B test subject lines
   - Suppression rules (recently emailed, unsubscribed, bounced)
   - Preheader text optimization
   - Dynamic content blocks for different audience segments
   - Follow-up campaign for non-openers
+- **Generate small, minimal HTML template files** that can be produced quickly — avoid bloated markup, excessive inline styles, or placeholder content that inflates file size. Keep the template lean and focused.
 - This is PLANNING ONLY — do NOT run `tdx engage` or any other `tdx` CLI commands. Do NOT push templates or deploy campaigns.
