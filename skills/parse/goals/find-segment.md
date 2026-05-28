@@ -10,7 +10,12 @@
 
    If industry and data source were already provided in the user's initial prompt (or a prior step), **omit those questions** — use those values directly and only ask the segmentation goal question. Otherwise, include all 3 questions in a single AskUserQuestion with `layout: 'form'`:
 
-   **Question 1 — Industry** (single-select, skip if already known):
+   **Question 1 — Segmentation goal** (single-select, `allowOther: true`):
+   - Header: "Segment type"
+   - Question: "What type of customer segment do you want to find?"
+   - Suggest 3–4 segment types that are broadly applicable. Do not include a generic "Custom" or freeform option in the suggested list — `allowOther` already provides an "Other" option for that.
+
+   **Question 2 — Industry** (single-select, skip if already known):
    - Header: "Industry"
    - Question: "What industry are you in?"
    - Options:
@@ -25,7 +30,7 @@
      | D2C | |
      | B2B Tech | |
 
-   **Question 2 — Data source** (single-select, skip if already known):
+   **Question 3 — Data source** (single-select, skip if already known):
    - Header: "Data"
    - Question: "Which data source should we work with?"
    - Options:
@@ -34,11 +39,6 @@
      |-------|-------------|
      | Synthetic data | Use pre-loaded sample datasets to explore features |
      | Upload my own data | Import CSV, JSON, or other files |
-
-   **Question 3 — Segmentation goal** (single-select, `allowOther: true`):
-   - Header: "Segment type"
-   - Question: "What type of customer segment do you want to find?"
-   - Suggest 3–4 segment types that are broadly applicable. Do not include a generic "Custom" or freeform option in the suggested list — `allowOther` already provides an "Other" option for that.
 
    After the user answers:
    - Tailor terminology, examples, and KPIs to their industry for the rest of the session.

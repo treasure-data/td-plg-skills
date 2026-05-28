@@ -8,7 +8,18 @@
 
    Otherwise, use a single AskUserQuestion with `layout: 'form'` containing up to 3 questions (omitting any already known):
 
-   **Question 1 — Industry** (single-select):
+   **Question 1 — Analysis purpose** (single-select):
+   - Header: "Purpose"
+   - Question: "What would you like to learn from your data?"
+   - Options:
+
+     | Label | Description |
+     |-------|-------------|
+     | Understand my customers | Who they are, what they do, and why |
+     | Track performance | Measure KPIs, trends, or campaign results |
+     | Find opportunities | Discover growth areas, segments, or patterns |
+
+   **Question 2 — Industry** (single-select):
    - Header: "Industry"
    - Question: "What industry are you in?"
    - Options:
@@ -23,7 +34,7 @@
      | D2C | |
      | B2B Tech | |
 
-   **Question 2 — Data source** (single-select):
+   **Question 3 — Data source** (single-select):
    - Header: "Data"
    - Question: "Which data source should we work with?"
    - Options:
@@ -32,17 +43,6 @@
      |-------|-------------|
      | Synthetic data | Use pre-loaded sample datasets to explore features |
      | Upload my own data | Import CSV, JSON, or other files |
-
-   **Question 3 — Analysis purpose** (single-select):
-   - Header: "Purpose"
-   - Question: "What would you like to learn from your data?"
-   - Options:
-
-     | Label | Description |
-     |-------|-------------|
-     | Understand my customers | Who they are, what they do, and why |
-     | Track performance | Measure KPIs, trends, or campaign results |
-     | Find opportunities | Discover growth areas, segments, or patterns |
 
    If the user selects "Other" for the analysis purpose, ask a free-text follow-up using AskUserQuestion.
 

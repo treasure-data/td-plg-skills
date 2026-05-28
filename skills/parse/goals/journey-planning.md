@@ -8,11 +8,23 @@ Plan a CDP customer journey in 5 steps: setup via FormCard, generate a skeleton 
 
 1. **Greet the user** — acknowledge their goal ("journey planning"). Be concise and action-oriented. **Clearly state that this flow is for demo purposes only and no changes will be made to any data — the result is a plan preview only.**
 
-2. **Ask industry & data source** — before the form, briefly explain what journey orchestration involves (1–2 sentences).
+2. **Ask journey type, industry & data source** — before the form, briefly explain what journey orchestration involves (1–2 sentences).
 
-   If industry and/or data source were already provided in the user's initial prompt (or a prior step), **omit those questions** — use those values directly and only ask the remaining questions. If both are already known, skip this step entirely and proceed to Step 1 (Journey Setup). Otherwise, include only the missing questions in a single AskUserQuestion with `layout: 'form'`:
+   If journey type, industry, and/or data source were already provided in the user's initial prompt (or a prior step), **omit those questions** — use those values directly and only ask the remaining questions. If all three are already known, skip this step entirely and proceed to Step 1 (Journey Setup). Otherwise, include only the missing questions in a single AskUserQuestion with `layout: 'form'`:
 
-   **Question 1 — Industry** (single-select, skip if already known):
+   **Question 1 — Journey type** (single-select, skip if already known):
+   - Header: "Type"
+   - Question: "What type of customer journey would you like to plan?"
+   - Options:
+
+     | Label | Description |
+     |-------|-------------|
+     | Welcome / onboarding series | Guide new customers through their first experience |
+     | Re-engagement / win-back | Bring back inactive or lapsed customers |
+     | Upsell / cross-sell | Drive additional purchases from existing customers |
+     | Loyalty program | Reward and retain your best customers |
+
+   **Question 2 — Industry** (single-select, skip if already known):
    - Header: "Industry"
    - Question: "What industry are you in?"
    - Options:
@@ -27,7 +39,7 @@ Plan a CDP customer journey in 5 steps: setup via FormCard, generate a skeleton 
      | D2C | |
      | B2B Tech | |
 
-   **Question 2 — Data source** (single-select, skip if already known):
+   **Question 3 — Data source** (single-select, skip if already known):
    - Header: "Data"
    - Question: "Which data source should we work with?"
    - Options:
@@ -46,30 +58,18 @@ Plan a CDP customer journey in 5 steps: setup via FormCard, generate a skeleton 
 
 ### Step 1: Journey Setup
 
-Briefly explain what a customer journey is and what we need to configure (1–2 sentences): *"A customer journey is an automated sequence of messages and actions triggered by customer behavior. We'll define the type of journey, who enters it, and which channels to use."*
+Briefly explain what a customer journey is and what we need to configure (1–2 sentences): *"A customer journey is an automated sequence of messages and actions triggered by customer behavior. We'll define who enters it and which channels to use."*
 
-If journey type was already provided in the user's initial prompt, **omit that question** — use that value directly and only ask the remaining questions. Include only the missing questions in a single AskUserQuestion with `layout: 'form'`:
+Use a single AskUserQuestion with `layout: 'form'`:
 
-**Question 1 — Journey type** (single-select, skip if already known):
-- Header: "Type"
-- Question: "What type of customer journey would you like to plan?"
-- Options:
-
-  | Label | Description |
-  |-------|-------------|
-  | Welcome / onboarding series | Guide new customers through their first experience |
-  | Re-engagement / win-back | Bring back inactive or lapsed customers |
-  | Upsell / cross-sell | Drive additional purchases from existing customers |
-  | Loyalty program | Reward and retain your best customers |
-
-**Question 2 — Target audience** (free-text):
+**Question 1 — Target audience** (free-text):
 - Header: "Audience"
 - Question: "Who should enter this journey? Describe the target audience."
 - options: [] (empty — renders as text input)
 - allowOther: true
 - defaultOtherText: "New signups in the last 7 days"
 
-**Question 3 — Channels** (multi-select):
+**Question 2 — Channels** (multi-select):
 - Header: "Channels"
 - Question: "Which channels should this journey use?"
 - defaultValue: ["Email"]
