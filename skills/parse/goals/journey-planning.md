@@ -94,6 +94,12 @@ The initial `.md` file should contain:
 ```markdown
 # [Journey Name] — Journey Plan
 
+## Next Steps
+- [ ] Generate journey structure
+- [ ] Build out stage details
+- [ ] Define success metrics and pacing
+- [ ] Finalize journey plan
+
 ## Overview
 - **Journey Type:** [selected journey type]
 - **Industry:** [selected industry]
@@ -106,12 +112,6 @@ The initial `.md` file should contain:
 
 ## Journey Strategy
 [2–3 sentences outlining the strategic direction based on journey type + industry + audience]
-
-## Next Steps
-- [ ] Generate journey structure
-- [ ] Build out stage details
-- [ ] Define success metrics and pacing
-- [ ] Finalize journey plan
 
 ---
 *Draft generated during journey planning. This document will be updated as we design the journey stages and refine the plan.*

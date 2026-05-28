@@ -52,6 +52,11 @@
    ```markdown
    # [Segment Name] — Segment Brief
 
+   ## Next Steps
+   - [ ] Explore available data
+   - [ ] Define segment criteria
+   - [ ] Estimate segment size
+
    ## Overview
    - **Goal:** [selected segmentation goal]
    - **Industry:** [selected industry]
@@ -62,11 +67,6 @@
 
    ## Direction
    [2–3 sentences outlining the strategic direction based on goal + industry]
-
-   ## Next Steps
-   - [ ] Explore available data
-   - [ ] Define segment criteria
-   - [ ] Estimate segment size
 
    ---
    *Draft generated during segment planning. This document will be updated as we refine the criteria.*
