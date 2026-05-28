@@ -1,6 +1,6 @@
 ---
 name: parse
-description: "ALWAYS invoke this skill FIRST on every single user message in this project — before answering, before any other skill, before any tool call. No exceptions. This is the guided-flow controller for Treasure AI Preview. Triggers on: greetings (hi, hello, hey), questions (what is, how do, why does, can you), commands (build, create, show, find, generate, plan, design, analyze), marketing terms (CDP, segment, journey, campaign, audience, customer, email, churn, retention, KPI, funnel), follow-ups, clarifications, off-topic asks, unclear prompts, and any free-text message. The router classifies intent as Strong / Medium / None and routes: Strong invokes a goal playbook directly, Medium answers briefly then offers a playbook with confirm, None answers the question and adds a soft inline nudge. Do NOT skip this skill. Do NOT defer to goal skills or general answering until parse has classified the message."
+description: "Guided-flow controller for Treasure AI Studio. Invoke FIRST on every user message — before answering, before tdx-skills, and before any other skill. Classifies intent (Strong / Medium / None) and routes to goal playbooks: journey planning, campaign planning, audience segmentation, data analysis, or learning about Treasure AI. Handles greetings, marketing questions, commands, follow-ups, and off-topic messages."
 allowed-tools:
   - Read
   - Glob
@@ -102,7 +102,14 @@ The nudge MUST relate to what the user actually asked about. Use this priority:
 
 ### Generic fallback nudge (use when no topic match)
 
-> *If you'd like, I can walk you through a quick setup to tailor things to your industry and goals — just say "walk me through setup".*
+Generate a single italicized sentence that invites the user to explore Treasure AI. The nudge must:
+- Mention **two concrete capabilities** drawn from the goal map (e.g., identifying audiences, planning customer journeys, drafting email campaigns, analyzing customer data, learning about Treasure AI).
+- Vary the pair each time so the nudge doesn't feel repetitive across turns.
+- Keep the warm, inviting tone — phrased as an offer ("Feel free to…", "You can also…", "Ask me anything about…").
+
+Example (do not reuse verbatim — generate a fresh variation each time):
+
+> *Ask me anything about marketing — from identifying your ideal audience to planning a customer journey, I'm here to help!*
 
 ### Anti-patterns — DO NOT do these
 
