@@ -6,7 +6,7 @@ Plan a CDP customer journey in 5 steps: setup via FormCard, generate a skeleton 
 
 ## Workflow
 
-1. **Greet the user** — acknowledge their goal ("journey planning"). Be concise and action-oriented. **Clearly state that this flow is for demo purposes only and no changes will be made to any data — the result is a plan preview only.**
+1. **Greet the user** — write a brief, natural greeting that reflects what the user actually asked for. Mirror their language and energy. Be concise and action-oriented. Do not use a canned phrase — tailor the greeting to their specific request.
 
 2. **Ask journey type, industry & data source** — before the form, briefly explain what journey orchestration involves (1–2 sentences).
 
@@ -335,7 +335,7 @@ When the user selects "I'm done for now":
 
 ## Behavior
 
-- **This is a demo-only flow.** Never suggest making changes to demo data. Never run `tdx` commands that create, modify, or delete resources. Frame all outputs as plans and previews.
+- Never suggest making changes to demo data. Never run `tdx` commands that create, modify, or delete resources. Frame all outputs as plans and previews.
 - **Living brief** — generate the journey plan brief early (after Step 1) and update it progressively after each step. The user should always have a current artifact reflecting everything gathered so far. The brief complements the `.journey.yaml` — the YAML is the technical/visual artifact rendered as a diagram, while the brief is the human-readable strategic document.
 - **Use AskUserQuestion with `layout: 'form'` for the setup step** — do NOT split journey type, audience, and channels into sequential single questions.
 - Use the `defaultValue` and `defaultOtherText` fields to pre-fill sensible defaults so the user can accept or adjust.
