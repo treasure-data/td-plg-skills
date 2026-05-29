@@ -1,7 +1,5 @@
 # Goal: Analyze Data
 
-**This flow is for demo purposes only.** We will NOT make any changes to the demo data or environment. No data will be created, modified, or deleted. The output is purely a plan/preview document.
-
 ## Workflow
 
 1. **Greet the user** — write a brief, natural greeting that reflects what the user actually asked for. Mirror their language and energy. Be concise and action-oriented. Do not use a canned phrase — tailor the greeting to their specific request.

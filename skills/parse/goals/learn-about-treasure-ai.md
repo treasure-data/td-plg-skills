@@ -12,9 +12,9 @@ Answer questions about Treasure AI, an Agentic Experience Platform, its features
    ```
    Summarize the relevant information for the user rather than linking them away.
 
-3. **Offer a hands-on demo** — after answering, inquire if user wants to walkthrough a hands-on demo. Use AskUserQuestion (single-select) to offer a hands-on demo of a specific capability:
+3. **Offer a playbook** — after answering, inquire if the user wants to walk through a playbook. Use AskUserQuestion (single-select) to offer a guided playbook:
 
-   - Question: "Want to see any of these in action? I can walk you through a hands-on demo."
+   - Question: "Want to see any of these in action? I can walk you through a playbook."
    - Options:
 
      | Label | Description |
@@ -25,7 +25,7 @@ Answer questions about Treasure AI, an Agentic Experience Platform, its features
      | Plan an email campaign | Draft a targeted email campaign with audience and template |
      | No thanks, I'm good | Continue exploring on your own |
 
-   **If the user selects a demo:** Read the corresponding goal file and execute its workflow from Step 1:
+   **If the user selects a playbook:** Read the corresponding goal file and execute its workflow from Step 1:
 
    | Selection | Goal file |
    |-----------|-----------|

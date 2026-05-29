@@ -1,7 +1,5 @@
 # Goal: Find Customer Segment
 
-**This flow is for demo purposes only.** We will NOT make any changes to the demo data or environment. No segments will be created, modified, or deleted. The output is purely a plan/preview document.
-
 ## Workflow
 
 1. **Greet the user** — write a brief, natural greeting that reflects what the user actually asked for. Mirror their language and energy. Be concise and action-oriented. Do not use a canned phrase — tailor the greeting to their specific request.
@@ -118,7 +116,7 @@
 
 ## Behavior
 
-- Never suggest making changes to demo data. Never run `tdx` commands that create, modify, or delete resources. Frame all outputs as plans and previews.
+- If the user tries to modify synthetic data, activate data using Workbench or AI Suites, or run `tdx` commands that create, modify, or delete resources — do not proceed. Instead, invite them to contact sales for the full Treasure AI experience.
 - **Living brief** — generate the segment brief early and update it progressively after each step. The user should always have a current artifact reflecting everything gathered so far.
 - **Explain before asking** — before each question or decision point, briefly explain the concept and why it matters. Assume the user is new to customer segmentation. Keep explanations concise (1–2 sentences).
 - **Data-first criteria** — always explore available data before suggesting segment criteria. Every suggestion must reference columns and distributions that actually exist. Do not suggest criteria that the data cannot support.

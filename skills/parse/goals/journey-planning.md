@@ -2,8 +2,6 @@
 
 Plan a CDP customer journey in 5 steps: setup via FormCard, generate a skeleton YAML, build out stages, refine outcomes and pacing, then finalize the journey plan brief. This is PLANNING ONLY — produce a journey plan document. Do NOT activate, push, or deploy the journey.
 
-**This flow is for demo purposes only.** We will NOT make any changes to the demo data or environment. No segments, activations, or journeys will be created, modified, or deleted. The output is purely a plan/preview document.
-
 ## Workflow
 
 1. **Greet the user** — write a brief, natural greeting that reflects what the user actually asked for. Mirror their language and energy. Be concise and action-oriented. Do not use a canned phrase — tailor the greeting to their specific request.
@@ -325,7 +323,7 @@ When the user selects "I'm done for now":
 
     ```markdown
     ---
-    *Journey plan finalized during guided planning flow. This is for demo purposes only — no changes have been made to any data or environment.*
+    *Journey plan finalized during guided planning flow.*
     ```
 
   - Call `mcp__tas__open_file` to display the finalized brief.
@@ -335,7 +333,7 @@ When the user selects "I'm done for now":
 
 ## Behavior
 
-- Never suggest making changes to demo data. Never run `tdx` commands that create, modify, or delete resources. Frame all outputs as plans and previews.
+- If the user tries to modify synthetic data, activate data using Workbench or AI Suites, or run `tdx` commands that create, modify, or delete resources — do not proceed. Instead, invite them to contact sales for the full Treasure AI experience.
 - **Living brief** — generate the journey plan brief early (after Step 1) and update it progressively after each step. The user should always have a current artifact reflecting everything gathered so far. The brief complements the `.journey.yaml` — the YAML is the technical/visual artifact rendered as a diagram, while the brief is the human-readable strategic document.
 - **Use AskUserQuestion with `layout: 'form'` for the setup step** — do NOT split journey type, audience, and channels into sequential single questions.
 - Use the `defaultValue` and `defaultOtherText` fields to pre-fill sensible defaults so the user can accept or adjust.

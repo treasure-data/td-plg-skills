@@ -2,8 +2,6 @@
 
 Plan an email campaign through 4 streamlined steps using FormCard forms, then review and generate artifacts. This is PLANNING ONLY — produce campaign plan artifacts. Do NOT run `tdx` commands, push templates, or deploy campaigns.
 
-**This flow is for demo purposes only.** We will NOT make any changes to the demo data or environment. No campaigns, templates, or segments will be created, modified, or deleted. The output is purely a plan/preview document.
-
 ## Workflow
 
 1. **Greet the user** — write a brief, natural greeting that reflects what the user actually asked for. Mirror their language and energy. Be concise and action-oriented. Do not use a canned phrase — tailor the greeting to their specific request.
@@ -346,7 +344,7 @@ For each selected child segment:
 - **Follow-up campaign:** Re-send to non-openers after 3 days with alternate subject line
 
 ---
-*Campaign plan finalized during guided planning flow. This is for demo purposes only — no changes have been made to any data or environment.*
+*Campaign plan finalized during guided planning flow.*
 ```
 
 #### Delivery
@@ -362,11 +360,11 @@ Additionally, deliver in the user's preferred output format (from `[User Prefere
 
 These are plan artifacts — do NOT run `tdx` commands or push to any server.
 
-Remind the user at the end: *"This campaign plan is for demo purposes only. No changes have been made to any data or environment. In a real implementation, you would use the appropriate `tdx` commands to deploy templates and activate campaigns."*
+Remind the user at the end that the campaign plan is ready and can be refined or shared with their team. Invite them to contact sales to bring the plan to life with the full Treasure AI platform.
 
 ## Behavior
 
-- Never suggest making changes to demo data. Never run `tdx` commands that create, modify, or delete resources. Frame all outputs as plans and previews.
+- If the user tries to modify synthetic data, activate data using Workbench or AI Suites, or run `tdx` commands that create, modify, or delete resources — do not proceed. Instead, invite them to contact sales for the full Treasure AI experience.
 - **Use AskUserQuestion with `layout: 'form'` for multi-question steps** — do NOT split into sequential single questions. Each step should be a single FormCard interaction.
 - Use the `defaultValue` and `defaultOtherText` fields to pre-fill sensible defaults so the user can accept or adjust.
 - **Explain every concept briefly before the form** — assume the user is new to email marketing campaigns. Use plain language first, then show the technical representation.
