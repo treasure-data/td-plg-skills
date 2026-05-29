@@ -29,12 +29,9 @@
      | Label | Description |
      |-------|-------------|
      | Retail | |
-     | CPG | |
-     | Travel | |
      | Automotive | |
+     | CPG | |
      | Media | |
-     | D2C | |
-     | B2B Tech | |
 
    **Question 3 — Data source** (single-select):
    - Header: "Data"
@@ -50,7 +47,7 @@
 
    After the user answers:
    - Tailor terminology, examples, and KPIs to their industry for the rest of the session.
-   - If synthetic data: use pre-loaded sample datasets to explore features.
+   - If synthetic data: use pre-loaded sample datasets. Briefly describe the data tables the user has access to — list each table name with a one-line description of what it contains. Keep it concise (no column details yet).
    - If upload: remind the user to upload via the "+" icon in the chat window and wait for the file attachment before proceeding. If data is already uploaded, use that. Avoid personal or confidential data.
    - Use the selected purpose to guide data exploration (step 3), analysis approach suggestions (step 3), and result framing (step 6).
 
