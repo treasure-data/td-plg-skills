@@ -44,12 +44,12 @@ Plan an email campaign through 4 streamlined steps using FormCard forms, then re
 
      | Label | Description |
      |-------|-------------|
-     | Synthetic data | Use pre-loaded sample datasets to explore features |
+     | Default data | Use pre-loaded industry datasets to explore Treasure AI |
      | Upload my own data | Import CSV, JSON, or other files |
 
    After the user answers:
    - Tailor terminology, examples, and KPIs to their industry for the rest of the session.
-   - If synthetic data: use pre-loaded sample datasets. Briefly describe the data tables the user has access to — list each table name with a one-line description of what it contains. Keep it concise (no column details yet).
+   - If default data: use pre-loaded sample datasets. Briefly describe the data tables the user has access to — list each table name with a one-line description of what it contains. Keep it concise (no column details yet).
    - If upload: remind the user to upload via the "+" icon in the chat window and wait for the file attachment before proceeding. If data is already uploaded, use that. Avoid personal or confidential data.
    - If "Other" is selected for the campaign goal, ask one free-text follow-up for the goal description.
 
@@ -153,7 +153,7 @@ For Media:
 - Suggest 1–3 child segments with rule definitions **grounded in the actual data** (e.g., "Customers with 3+ orders" only if an `order_count` column exists). Do not add a "Custom audience" or similar freeform option — rely on the built-in "Other" option instead.
 
 **Conditional behavior by data source:**
-- **Synthetic data**: Reference concrete tables and columns from the sample datasets.
+- **Default data**: Reference concrete tables and columns from the sample datasets.
 - **Upload my own data**: Inspect the uploaded file's columns and map them to segment attributes. If no file is uploaded yet, remind the user to upload via the "+" icon and wait.
 
 If "Other" is selected, ask one free-text follow-up for their targeting criteria.

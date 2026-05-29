@@ -46,12 +46,12 @@ Plan a CDP customer journey in 5 steps: setup via FormCard, generate a skeleton 
 
      | Label | Description |
      |-------|-------------|
-     | Synthetic data | Use pre-loaded sample datasets to explore features |
+     | Default data | Use pre-loaded industry datasets to explore Treasure AI |
      | Upload my own data | Import CSV, JSON, or other files |
 
    After the user answers:
    - Tailor terminology, examples, and KPIs to their industry for the rest of the session.
-   - If synthetic data: use pre-loaded sample datasets. Briefly describe the data tables the user has access to — list each table name with a one-line description of what it contains. Keep it concise (no column details yet).
+   - If default data: use pre-loaded sample datasets. Briefly describe the data tables the user has access to — list each table name with a one-line description of what it contains. Keep it concise (no column details yet).
    - If upload: remind the user to upload via the "+" icon in the chat window and wait for the file attachment before proceeding. If data is already uploaded, use that. Avoid personal or confidential data.
 
 3. **Five steps**: Setup (FormCard) → Skeleton YAML → Build out stages → Refine outcomes → Summary artifact.
