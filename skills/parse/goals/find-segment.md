@@ -23,9 +23,9 @@
      | Label | Description |
      |-------|-------------|
      | Retail | |
-     | CPG | |
-     | Travel | |
      | Automotive | |
+     | CPG | |
+     | Media | |
      | Media | |
      | D2C | |
      | B2B Tech | |
@@ -37,12 +37,12 @@
 
      | Label | Description |
      |-------|-------------|
-     | Synthetic data | Use pre-loaded sample datasets to explore features |
+     | Default data | Use pre-loaded industry datasets to explore Treasure AI |
      | Upload my own data | Import CSV, JSON, or other files |
 
    After the user answers:
    - Tailor terminology, examples, and KPIs to their industry for the rest of the session.
-   - If synthetic data: use pre-loaded sample datasets to explore features.
+   - If default data: use pre-loaded sample datasets. Briefly describe the data tables the user has access to — list each table name with a one-line description of what it contains. Keep it concise (no column details yet).
    - If upload: remind the user to upload via the "+" icon in the chat window and wait for the file attachment before proceeding. If data is already uploaded, use that. Avoid personal or confidential data.
 
 3. **Generate initial segment brief** — based on the user's answers, generate a markdown file named `[segment-name]-brief.md` (auto-generated from goal + industry, e.g., `retail-high-value-brief.md`). Write to the working directory and open with `mcp__tdx-studio__open_file`. Tell the user: "I've created an initial segment brief. We'll fill in the details as we explore your data."

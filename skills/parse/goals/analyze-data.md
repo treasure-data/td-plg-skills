@@ -29,12 +29,9 @@
      | Label | Description |
      |-------|-------------|
      | Retail | |
-     | CPG | |
-     | Travel | |
      | Automotive | |
+     | CPG | |
      | Media | |
-     | D2C | |
-     | B2B Tech | |
 
    **Question 3 — Data source** (single-select):
    - Header: "Data"
@@ -43,19 +40,19 @@
 
      | Label | Description |
      |-------|-------------|
-     | Synthetic data | Use pre-loaded sample datasets to explore features |
+     | Default data | Use pre-loaded industry datasets to explore Treasure AI |
      | Upload my own data | Import CSV, JSON, or other files |
 
    If the user selects "Other" for the analysis purpose, ask a free-text follow-up using AskUserQuestion.
 
    After the user answers:
    - Tailor terminology, examples, and KPIs to their industry for the rest of the session.
-   - If synthetic data: use pre-loaded sample datasets to explore features.
+   - If default data: use pre-loaded sample datasets. Briefly describe the data tables the user has access to — list each table name with a one-line description of what it contains. Keep it concise (no column details yet).
    - If upload: remind the user to upload via the "+" icon in the chat window and wait for the file attachment before proceeding. If data is already uploaded, use that. Avoid personal or confidential data.
    - Use the selected purpose to guide data exploration (step 3), analysis approach suggestions (step 3), and result framing (step 6).
 
 3. **Explore data + suggest analysis approaches** — briefly explain what data is available and why it matters before showing tables. Focus the exploration on tables and columns most relevant to the user's analysis purpose. Based on the data source:
-   - Synthetic data: list available tables in the database and describe their schemas (table names, key columns). Skip row counts, column distributions, and data quality checks — defer those to the analysis execution step.
+   - Default data: list available tables in the database and describe their schemas (table names, key columns). Skip row counts, column distributions, and data quality checks — defer those to the analysis execution step.
    - Upload my own data: wait for file upload, then inspect the file structure (columns, types). Skip row counts.
 
    Then, based on the user's analysis purpose, industry, and the actual data available, suggest 2–3 concrete analysis approaches **grounded in the data** (e.g., only suggest basket analysis if transaction-level purchase data exists). Explain what an analysis approach is and why you're recommending these specific ones. Use AskUserQuestion to let the user pick an approach or describe their own. Examples by industry:
