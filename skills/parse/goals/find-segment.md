@@ -4,7 +4,7 @@
 
 ## Workflow
 
-1. **Greet the user** — acknowledge their goal ("find customer segment") and output preference. Be concise and action-oriented. **Clearly state that this flow is for demo purposes only and no changes will be made to any data — the result is a plan preview only.**
+1. **Greet the user** — write a brief, natural greeting that reflects what the user actually asked for. Mirror their language and energy. Be concise and action-oriented. Do not use a canned phrase — tailor the greeting to their specific request.
 
 2. **Ask industry, data source & segmentation goal** — before the form, briefly explain what a customer segment is and why the segment type matters (1–2 sentences).
 
@@ -118,7 +118,7 @@
 
 ## Behavior
 
-- **This is a demo-only flow.** Never suggest making changes to demo data. Never run `tdx` commands that create, modify, or delete resources. Frame all outputs as plans and previews.
+- Never suggest making changes to demo data. Never run `tdx` commands that create, modify, or delete resources. Frame all outputs as plans and previews.
 - **Living brief** — generate the segment brief early and update it progressively after each step. The user should always have a current artifact reflecting everything gathered so far.
 - **Explain before asking** — before each question or decision point, briefly explain the concept and why it matters. Assume the user is new to customer segmentation. Keep explanations concise (1–2 sentences).
 - **Data-first criteria** — always explore available data before suggesting segment criteria. Every suggestion must reference columns and distributions that actually exist. Do not suggest criteria that the data cannot support.

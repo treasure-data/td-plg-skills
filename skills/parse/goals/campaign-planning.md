@@ -6,7 +6,7 @@ Plan an email campaign through 4 streamlined steps using FormCard forms, then re
 
 ## Workflow
 
-1. **Greet the user** — acknowledge their goal ("campaign planning"). Be concise and action-oriented. **Clearly state that this flow is for demo purposes only and no changes will be made to any data — the result is a plan preview only.**
+1. **Greet the user** — write a brief, natural greeting that reflects what the user actually asked for. Mirror their language and energy. Be concise and action-oriented. Do not use a canned phrase — tailor the greeting to their specific request.
 
 2. **Ask industry, data source & campaign goal** — before the form, briefly explain what email campaign planning involves and why the goal matters (1–2 sentences).
 
@@ -366,7 +366,7 @@ Remind the user at the end: *"This campaign plan is for demo purposes only. No c
 
 ## Behavior
 
-- **This is a demo-only flow.** Never suggest making changes to demo data. Never run `tdx` commands that create, modify, or delete resources. Frame all outputs as plans and previews.
+- Never suggest making changes to demo data. Never run `tdx` commands that create, modify, or delete resources. Frame all outputs as plans and previews.
 - **Use AskUserQuestion with `layout: 'form'` for multi-question steps** — do NOT split into sequential single questions. Each step should be a single FormCard interaction.
 - Use the `defaultValue` and `defaultOtherText` fields to pre-fill sensible defaults so the user can accept or adjust.
 - **Explain every concept briefly before the form** — assume the user is new to email marketing campaigns. Use plain language first, then show the technical representation.

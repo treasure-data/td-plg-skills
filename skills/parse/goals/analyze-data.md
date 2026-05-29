@@ -1,8 +1,10 @@
 # Goal: Analyze Data
 
+**This flow is for demo purposes only.** We will NOT make any changes to the demo data or environment. No data will be created, modified, or deleted. The output is purely a plan/preview document.
+
 ## Workflow
 
-1. **Greet the user** — acknowledge their goal ("analyze data") and output preference. Be concise and action-oriented.
+1. **Greet the user** — write a brief, natural greeting that reflects what the user actually asked for. Mirror their language and energy. Be concise and action-oriented. Do not use a canned phrase — tailor the greeting to their specific request.
 
 2. **Ask industry, data source & analysis purpose** — if industry, data source, or analysis purpose were already provided in the user's initial prompt (or a prior step), **omit those questions** — use those values directly and only ask the remaining questions. If the user's stated purpose is vague, ask a clarifying question about the analysis goal instead of showing the full options. If all three are known, skip the form entirely.
 
