@@ -1,6 +1,6 @@
 # Goal: Campaign Planning
 
-Plan an email campaign through 4 streamlined steps using FormCard forms, then review and generate artifacts. This is PLANNING ONLY — produce campaign plan artifacts. Do NOT run `tdx` commands, push templates, or deploy campaigns.
+Plan an email campaign through 4 streamlined steps using FormCard forms, then review and generate a campaign plan and email template. This is PLANNING ONLY — produce a campaign plan and email template. Do NOT run `tdx` commands, push templates, or deploy campaigns.
 
 **This flow is for demo purposes only.** We will NOT make any changes to the demo data or environment. No campaigns, templates, or segments will be created, modified, or deleted. The output is purely a plan/preview document.
 
@@ -53,7 +53,7 @@ Plan an email campaign through 4 streamlined steps using FormCard forms, then re
    - If upload: remind the user to upload via the "+" icon in the chat window and wait for the file attachment before proceeding. If data is already uploaded, use that. Avoid personal or confidential data.
    - If "Other" is selected for the campaign goal, ask one free-text follow-up for the goal description.
 
-3. **Walk the user through 4 streamlined steps (plus review and artifact generation).** Each step uses a single AskUserQuestion with `layout: 'form'` so the user sees all related questions at once and can adjust pre-filled defaults.
+3. **Walk the user through 4 streamlined steps (plus review and output generation).** Each step uses a single AskUserQuestion with `layout: 'form'` so the user sees all related questions at once and can adjust pre-filled defaults.
 
 ### Step 1: Generate Campaign Plan Draft
 
@@ -256,18 +256,18 @@ Use AskUserQuestion:
 
   | Label | Description |
   |-------|-------------|
-  | Looks good — generate the artifacts | Proceed to output generation |
+  | Looks good — generate the campaign plan and email template | Proceed to output generation |
   | Change the audience segments | Go back to segment planning |
   | Change the email template | Go back to template planning |
   | Change the campaign goal | Start over with a new goal |
 
-If the user requests changes, return to the appropriate step. Otherwise proceed to artifact generation.
+If the user requests changes, return to the appropriate step. Otherwise proceed to output generation.
 
-### Step 5: Generate Final Artifacts
+### Step 5: Generate Campaign Plan & Email Template
 
 Generate two outputs:
 
-#### Artifact 1: HTML Email Template
+#### 1. HTML Email Template
 
 **[campaign-name]-template.html** — a complete, responsive HTML email:
 - Use table-based layout for email client compatibility
@@ -289,7 +289,7 @@ Generate two outputs:
 
 The HTML should be a complete, working email template — not a skeleton.
 
-#### Artifact 2: Updated Campaign Plan (.md)
+#### 2. Updated Campaign Plan (.md)
 
 Update the **[campaign-name]-plan.md** file created in Step 1 with all information gathered during the flow. The final `.md` should contain:
 
@@ -357,7 +357,7 @@ Additionally, deliver in the user's preferred output format (from `[User Prefere
 - **Data table**: present the plan as structured tables (audience, template, settings sections).
 - **Written summary**: narrative walkthrough of the complete campaign with rationale for each decision.
 
-These are plan artifacts — do NOT run `tdx` commands or push to any server.
+These are plan documents — do NOT run `tdx` commands or push to any server.
 
 Remind the user at the end: *"This campaign plan is for demo purposes only. No changes have been made to any data or environment. In a real implementation, you would use the appropriate `tdx` commands to deploy templates and activate campaigns."*
 
