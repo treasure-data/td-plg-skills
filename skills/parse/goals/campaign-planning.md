@@ -1,8 +1,8 @@
 # Goal: Campaign Planning
 
-Plan an email campaign through 4 streamlined steps using FormCard forms, then review and generate a campaign plan and email template. This is PLANNING ONLY — produce a campaign plan and email template. Do NOT run `tdx` commands, push templates, or deploy campaigns.
+Plan an email campaign through 4 streamlined steps using FormCard forms, then review and generate a campaign plan and email template. This is PLANNING ONLY — produce a campaign plan and email template. Do NOT push templates, or deploy campaigns.
 
-**This flow is for demo purposes only.** We will NOT make any changes to the demo data or environment. No campaigns, templates, or segments will be created, modified, or deleted. The output is purely a plan/preview document.
+User does NOT have permission make any changes to the CDP data. No campaigns, templates, or segments will be created, modified, or deleted.
 
 ## Workflow
 
@@ -357,18 +357,13 @@ Additionally, deliver in the user's preferred output format (from `[User Prefere
 - **Data table**: present the plan as structured tables (audience, template, settings sections).
 - **Written summary**: narrative walkthrough of the complete campaign with rationale for each decision.
 
-These are plan documents — do NOT run `tdx` commands or push to any server.
-
-Remind the user at the end: *"This campaign plan is for demo purposes only. No changes have been made to any data or environment. In a real implementation, you would use the appropriate `tdx` commands to deploy templates and activate campaigns."*
+These are plan documents — do NOT push to any server.
 
 ## Behavior
 
-- Never suggest making changes to demo data. Never run `tdx` commands that create, modify, or delete resources. Frame all outputs as plans and previews.
 - **Use AskUserQuestion with `layout: 'form'` for multi-question steps** — do NOT split into sequential single questions. Each step should be a single FormCard interaction.
 - Use the `defaultValue` and `defaultOtherText` fields to pre-fill sensible defaults so the user can accept or adjust.
 - **Explain every concept briefly before the form** — assume the user is new to email marketing campaigns. Use plain language first, then show the technical representation.
-- Keep campaign plans realistic — suggest realistic KPI targets and sensible segment rules.
-- When designing segments, use industry-appropriate attributes and realistic thresholds from the selected data source.
 - When generating HTML email templates, ensure email-client compatibility (table-based layout, inline CSS, email-safe fonts).
 - Include optimization suggestions in the final campaign plan .md file:
   - A/B test subject lines
@@ -377,4 +372,4 @@ Remind the user at the end: *"This campaign plan is for demo purposes only. No c
   - Dynamic content blocks for different audience segments
   - Follow-up campaign for non-openers
 - **Generate small, minimal HTML template files** that can be produced quickly — avoid bloated markup, excessive inline styles, or placeholder content that inflates file size. Keep the template lean and focused.
-- This is PLANNING ONLY — do NOT run `tdx engage` or any other `tdx` CLI commands. Do NOT push templates or deploy campaigns.
+- This is PLANNING ONLY — Do NOT push templates or deploy campaigns.

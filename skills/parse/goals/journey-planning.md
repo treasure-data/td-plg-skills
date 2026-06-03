@@ -2,7 +2,7 @@
 
 Plan a CDP customer journey in 5 steps: setup via FormCard, generate a skeleton YAML, build out stages, refine outcomes and pacing, then finalize the journey plan brief. This is PLANNING ONLY — produce a journey plan document. Do NOT activate, push, or deploy the journey.
 
-**This flow is for demo purposes only.** We will NOT make any changes to the demo data or environment. No segments, activations, or journeys will be created, modified, or deleted. The output is purely a plan/preview document.
+User does NOT have permission make any changes to the CDP data. No segments, activations, or journeys will be created, modified, or deleted. 
 
 ## Workflow
 
@@ -24,7 +24,7 @@ Plan a CDP customer journey in 5 steps: setup via FormCard, generate a skeleton 
      | Upsell / cross-sell | Drive additional purchases from existing customers |
      | Loyalty program | Reward and retain your best customers |
 
-   **Question 2 — Industry** (single-select, skip if already known):
+  **Question 2 — Industry** (single-select, skip if already known):
    - Header: "Industry"
    - Question: "What industry are you in?"
    - Options:
@@ -35,9 +35,6 @@ Plan a CDP customer journey in 5 steps: setup via FormCard, generate a skeleton 
      | Automotive | |
      | CPG | |
      | Media | |
-     | Media | |
-     | D2C | |
-     | B2B Tech | |
 
    **Question 3 — Data source** (single-select, skip if already known):
    - Header: "Data"
@@ -62,12 +59,10 @@ Briefly explain what a customer journey is and what we need to configure (1–2 
 
 Use a single AskUserQuestion with `layout: 'form'`:
 
-**Question 1 — Target audience** (free-text):
+**Question 1 — Target audience** (single-select):
 - Header: "Audience"
-- Question: "Who should enter this journey? Describe the target audience."
-- options: [] (empty — renders as text input)
-- allowOther: true
-- defaultOtherText: "New signups in the last 7 days"
+- Question: "Who should enter this journey?"
+- Options: Generate 2–3 audience suggestions relevant to the selected journey type and industry. For example, a "Welcome / onboarding" journey in Retail might suggest "New signups in the last 7 days" and "First-time purchasers", while a "Re-engagement" journey in Automotive might suggest "Lapsed service customers" and "Inactive leads (90+ days)". The user can always select "Other" for a custom audience.
 
 **Question 2 — Channels** (multi-select):
 - Header: "Channels"
@@ -334,8 +329,6 @@ When the user selects "I'm done for now":
 
 
 ## Behavior
-
-- Never suggest making changes to demo data. Never run `tdx` commands that create, modify, or delete resources. Frame all outputs as plans and previews.
 - **Living brief** — generate the journey plan brief early (after Step 1) and update it progressively after each step. The user should always have a current artifact reflecting everything gathered so far. The brief complements the `.journey.yaml` — the YAML is the technical/visual artifact rendered as a diagram, while the brief is the human-readable strategic document.
 - **Use AskUserQuestion with `layout: 'form'` for the setup step** — do NOT split journey type, audience, and channels into sequential single questions.
 - Use the `defaultValue` and `defaultOtherText` fields to pre-fill sensible defaults so the user can accept or adjust.
