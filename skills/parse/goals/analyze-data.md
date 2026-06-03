@@ -1,6 +1,7 @@
 # Goal: Analyze Data
+Explore and analyze customer data to uncover patterns, trends, and actionable insights — with guided setup for industry, data source, and analysis approach.
 
-**This flow is for demo purposes only.** We will NOT make any changes to the demo data or environment. No data will be created, modified, or deleted. The output is purely a plan/preview document.
+User does NOT have permission make any changes to the CDP data. No data will be created, modified, or deleted.
 
 ## Workflow
 
@@ -105,20 +106,22 @@
 
    **Update the brief:** add a `## Results` section with the computed metrics, key data points, and any intermediate findings. Check off "Execute analysis queries" in Next Steps.
 
-5. **Ask output format** — before delivering results, use AskUserQuestion (single-select) to ask how the user wants to see the results:
+5. **Deliver results** — present the analysis results as a written summary with key takeaways. Include a data table when the analysis benefits from showing specific numbers.
+
+   **Update the brief (final):** add a `## Key Takeaways` section with the summary findings and actionable recommendations. Replace the Next Steps checklist with a completion note. Update the footer to mark the brief as finalized. Open the completed brief with `mcp__tdx-studio__open_file`.
+
+6. **Ask output format** — after delivering results, use AskUserQuestion (single-select):
 
    - Header: "Output"
-   - Question: "How would you like to see the results?"
+   - Question: "Would you like an interactive dashboard for these results?"
    - Options:
 
      | Label | Description |
      |-------|-------------|
-     | Interactive chart | Visual HTML dashboard with hover tooltips |
-     | Data table | Written summary with key takeaways and data table |
+     | Yes | Generate a visual HTML dashboard with hover tooltips |
+     | No thanks | Just the text summary is enough |
 
-6. **Deliver results** — present the analysis results based on the user's output choice.
-
-   **If interactive chart:** generate `[analysis-name]-results.html` — a self-contained HTML page (inline CSS + JS, no external dependencies). Keep the file small and quick to generate — simple inline SVG, minimal JS for hover tooltips. Populate with actual query results, not placeholder data. Match the chart type to the analysis approach:
+   If yes, generate `[analysis-name]-results.html` — a self-contained HTML page (inline CSS + JS, no external dependencies). Keep the file small and quick to generate — simple inline SVG, minimal JS for hover tooltips. Populate with actual query results, not placeholder data. Match the chart type to the analysis approach:
 
    | Approach | Chart |
    |----------|-------|
@@ -130,10 +133,6 @@
    | Other | Bar or line chart with hover tooltips |
 
    Include a "Key Takeaways" section below the chart as styled HTML text. Write the file and open with `mcp__tdx-studio__open_file`.
-
-   **If data table:** present the analysis results as a written summary with key takeaways. Include a data table when the analysis benefits from showing specific numbers.
-
-   **Update the brief (final):** add a `## Key Takeaways` section with the summary findings and actionable recommendations. Replace the Next Steps checklist with a completion note. Update the footer to mark the brief as finalized. Open the completed brief with `mcp__tdx-studio__open_file`.
 
 ## Behavior
 
