@@ -2,7 +2,7 @@
   "name": "td-plg-skills",
   "owner": {
     "name": "Treasure Data",
-    "email": "support@treasuredata.com"
+    "email": "support@treasure.ai"
   },
   "metadata": {
     "version": "1.0.0",
@@ -10,7 +10,7 @@
   },
   "plugins": [
     {
-      "name": "treasure-ai-plg",
+      "name": "treasure-ai-experience",
       "description": "Guided playbooks for Treasure AI Studio's Preview App",
       "source": "./",
       "strict": false,
