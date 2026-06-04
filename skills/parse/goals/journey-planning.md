@@ -62,7 +62,7 @@ Use a single AskUserQuestion with `layout: 'form'`:
 **Question 1 — Target audience** (single-select):
 - Header: "Audience"
 - Question: "Who should enter this journey?"
-- Options: Generate 2–3 audience suggestions relevant to the selected journey type and industry. For example, a "Welcome / onboarding" journey in Retail might suggest "New signups in the last 7 days" and "First-time purchasers", while a "Re-engagement" journey in Automotive might suggest "Lapsed service customers" and "Inactive leads (90+ days)". The user can always select "Other" for a custom audience.
+- Options: Generate 3 audience suggestions relevant to the journey type and industry. For example: "Welcome / onboarding", "New signups in the last 7 days" and "First-time purchasers". The user can always select "Other" for a custom audience.
 
 **Question 2 — Channels** (multi-select):
 - Header: "Channels"
@@ -139,7 +139,7 @@ Call `mcp__tas__open_file` to display — the frontend automatically renders a v
 - **Goal segment:** [goal segment definition from YAML]
 ```
 
-Check off "Generate journey structure" in Next Steps. Update the file and call `mcp__tas__open_file` to refresh it.
+Check off "Generate journey structure" in Next Steps. Update the file.
 
 Then immediately proceed to Step 3 (no confirmation needed).
 
