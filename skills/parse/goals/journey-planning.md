@@ -1,6 +1,6 @@
 # Goal: Journey Planning
 
-Plan a CDP customer journey setup via FormCard, generate a skeleton YAML, build out stages, refine outcomes and pacing, then finalize the journey plan brief. This is PLANNING ONLY — produce a journey plan document. Do NOT activate, push, or deploy the journey.
+Plan a journey in multiple steps. Setup via FormCard, generate a skeleton YAML, build out stages, refine outcomes and pacing, then finalize the journey plan brief.
 
 User does NOT have permission make any changes to the CDP data. No segments, activations, or journeys will be created, modified, or deleted. 
 
@@ -229,7 +229,7 @@ After submission:
 - Update the journey's goal segment to reflect the success metric.
 - Adjust all wait step durations to match the selected pacing.
 - Add exit criteria or a final fallback branch based on non-responder handling.
-- Update the `.journey.yaml` and call `mcp__tas__open_file` to show the refined diagram. Use `reference/journey_design_reference.md` as technical guide.
+- Update the `.journey.yaml` and call `mcp__tas__open_file` to show the refined diagram. Confirm journey yaml schema using `reference/journey_design_reference.md` as technical guide.
 
 **Update the journey plan brief:** Add a `## Journey Configuration` section to the `[journey-name]-plan.md` file:
 
@@ -240,7 +240,7 @@ After submission:
 - **Non-Responder Handling:** [selected fallback] — [description of what happens]
 ```
 
-Check off "Define success metrics and pacing" in Next Steps. Update the file and call `mcp__tas__open_file` to refresh it.
+Check off "Define success metrics and pacing" in Next Steps and update it
 
 If "Other" is selected, ask one free-text follow-up for the metric definition.
 
@@ -252,9 +252,6 @@ Generate 2-3 contextual refinement suggestions based on what the journey current
 - If the journey has no A/B test steps → suggest "Add A/B testing to compare message variants"
 - If only one channel is used → suggest "Add a secondary channel for non-responders"
 - If there are no exit criteria → suggest "Add suppression rules for opted-out customers"
-- If wait times are uniform → suggest "Vary timing based on customer engagement signals"
-- If the journey has many stages → suggest "Simplify by merging similar stages"
-- If no personalization is defined → suggest "Add personalization to activation messages"
 
 **Always include** "I'm done for now" as the final option.
 
@@ -282,9 +279,7 @@ When the user selects "I'm done for now":
     *Journey plan finalized during guided planning flow. This is for demo purposes only — no changes have been made to any data or environment.*
     ```
 
-  - Call `mcp__tas__open_file` to display the finalized brief.
-
-- Send a closing message (no AskUserQuestion). Mention the journey plan and diagram are ready and can be refined or shared with their team. Note the full Treasure AI platform unifies CDP + journey orchestration + activation — invite them to talk to sales for the full experience. Keep warm and concise (3-4 sentences, no bullets/headers).
+- Send a closing message. Mention the journey plan and diagram are ready and can be refined or shared with their team. Note the full Treasure AI platform unifies CDP + journey orchestration + activation — invite them to talk to sales for the full experience. Keep warm and concise (3 sentences, no bullets/headers).
 
 
 ## Behavior
@@ -292,4 +287,4 @@ When the user selects "I'm done for now":
 - **Use AskUserQuestion with `layout: 'form'` for the setup step** — do NOT split journey type, audience, and channels into sequential single questions.
 - Use the `defaultValue` and `defaultOtherText` fields to pre-fill sensible defaults so the user can accept or adjust.
 - **Present the journey plan stage by stage**, not concept by concept. Users think about the customer experience (what happens at each stage), not technical categories (segments vs. activations).
-- Use `reference/journey_design_reference.md` as technical guide fr building journey
+- Use `reference/journey_design_reference.md` as technical guide for building journey
