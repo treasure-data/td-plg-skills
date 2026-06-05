@@ -1,6 +1,6 @@
 # Goal: Journey Planning
 
-Plan a CDP customer journey in 5 steps: setup via FormCard, generate a skeleton YAML, build out stages, refine outcomes and pacing, then finalize the journey plan brief. This is PLANNING ONLY — produce a journey plan document. Do NOT activate, push, or deploy the journey.
+Plan a CDP customer journey setup via FormCard, generate a skeleton YAML, build out stages, refine outcomes and pacing, then finalize the journey plan brief. This is PLANNING ONLY — produce a journey plan document. Do NOT activate, push, or deploy the journey.
 
 User does NOT have permission make any changes to the CDP data. No segments, activations, or journeys will be created, modified, or deleted. 
 
@@ -62,7 +62,7 @@ Use a single AskUserQuestion with `layout: 'form'`:
 **Question 1 — Target audience** (single-select):
 - Header: "Audience"
 - Question: "Who should enter this journey?"
-- Options: Generate 2–3 audience suggestions relevant to the selected journey type and industry. For example, a "Welcome / onboarding" journey in Retail might suggest "New signups in the last 7 days" and "First-time purchasers", while a "Re-engagement" journey in Automotive might suggest "Lapsed service customers" and "Inactive leads (90+ days)". The user can always select "Other" for a custom audience.
+- Options: Generate 3 audience suggestions relevant to the selected journey type and industry. For example, a "Welcome / onboarding" journey in Retail might suggest "New signups in the last 7 days" and "First-time purchasers", while a "Re-engagement" journey in Automotive might suggest "Lapsed service customers" and "Inactive leads (90+ days)". The user can always select "Other" for a custom audience.
 
 **Question 2 — Channels** (multi-select):
 - Header: "Channels"
@@ -76,13 +76,14 @@ Use a single AskUserQuestion with `layout: 'form'`:
   | SMS | Send text messages |
   | Push notification | Send mobile push notifications |
   | In-app message | Show messages inside the app |
-  | Paid media | Target via advertising platforms |
 
 After submission, if "Other" is selected, ask one free-text follow-up for the scenario description.
 
 ### Generate Initial Journey Plan Brief
 
-After collecting all Step 1 inputs, generate an initial journey plan as a markdown file named `[journey-name]-plan.md`. The journey name should be auto-generated from the type + industry + audience (e.g., `retail-welcome-new-signups-plan.md`).
+After collecting all Step 1 inputs, generate an initial journey plan as a markdown file named `[journey-name]-plan.md`. The journey name should be auto-generated from the type + industry + audience (e.g., `retail-welcome-new-signups-plan.md`). 
+
+Follow instruction from `reference/journey_design_reference.md` for `.journey.yaml` file generation.
 
 The initial `.md` file should contain:
 
@@ -118,13 +119,13 @@ Then proceed to Step 2.
 
 ### Step 2: Journey Skeleton YAML
 
-Generate a `.journey.yaml` file with the high-level structure only. Start simple — 2 stages:
+Generate a `.journey.yaml` file with the high-level structure only (Follow instruction from `reference/journey_design_reference.md` for `.journey.yaml` file generation.). Start simple, 2 stages:
 - Journey name (auto-generated from type + industry + audience)
 - Description, goal segment definition
 - 2 stage names with entry criteria only (no steps yet). Step 3 can expand to more stages if the journey type warrants it.
 - Use the channels selected in Step 1
 
-Call `mcp__tas__open_file` to display — the frontend automatically renders a visual journey diagram showing the stage structure. Let the user know: "I've created an initial journey diagram — this is a live document that will update as we build out the stages and as you provide feedback."
+Call `mcp__tas__open_file` to display the `.journey.yaml`file. Let the user know: "I've created an initial journey diagram — this is a live diagram that will update as we build out the flow."
 
 **Update the journey plan brief:** Add a `## Journey Structure` section to the `[journey-name]-plan.md` file:
 
@@ -139,13 +140,13 @@ Call `mcp__tas__open_file` to display — the frontend automatically renders a v
 - **Goal segment:** [goal segment definition from YAML]
 ```
 
-Check off "Generate journey structure" in Next Steps. Update the file and call `mcp__tas__open_file` to refresh it.
+Check off "Generate journey structure" in Next Steps. Update the `[journey-name]-plan.md` file and call `mcp__tas__open_file` to refresh it.
 
 Then immediately proceed to Step 3 (no confirmation needed).
 
 ### Step 3: Build Out Stages
 
-For each stage, add full detail to the existing `.journey.yaml`:
+For each stage, add full detail to the existing `.journey.yaml` (Follow technical guidnace instruction from `reference/journey_design_reference.md`.):
 - Steps (activation, wait, decision_point, merge, end)
 - Branch segment definitions (inline where used in the flow)
 - Activation definitions with connector configs (inline where used in the flow)
@@ -181,117 +182,8 @@ After adding all stages, update the YAML file and call `mcp__tas__open_file` so 
 [Repeat for each stage]
 ```
 
-Check off "Build out stage details" in Next Steps. Update the file and call `mcp__tas__open_file` to refresh it.
-
 Then immediately proceed to Step 4.
 
-#### Technical reference for journey design
-
-**Step types**: `activation`, `wait`, `decision_point`, `ab_test`, `merge`, `end`, `jump`
-
-**Step format** — every step uses `uuid` as its identifier and nests type-specific properties under `with`:
-```yaml
-steps:
-  # Activation — sends a message or triggers an action
-  - uuid: send_welcome_email
-    type: activation
-    with:
-      activation: welcome_email_activation
-    next: wait_for_open
-
-  # Wait — pause for a fixed duration
-  - uuid: wait_for_open
-    type: wait
-    with:
-      duration: 3
-      unit: day
-    next: check_opened
-
-  # Wait — pause until a condition is met (no duration)
-  - uuid: wait_for_purchase
-    type: wait
-    with:
-      condition: purchased_segment
-
-  # Decision point — branch on segment membership
-  - uuid: check_opened
-    type: decision_point
-    with:
-      branches:
-        - name: opened
-          segment: email_opened_segment
-          next: send_followup
-        - name: not_opened
-          excluded: true
-          next: send_reminder
-
-  # A/B test — split traffic by percentage
-  - uuid: test_subject_line
-    type: ab_test
-    with:
-      variants:
-        - name: variant_a
-          percentage: 50
-          next: send_version_a
-        - name: variant_b
-          percentage: 50
-          next: send_version_b
-
-  # Merge — converge multiple branches
-  - uuid: post_branch_merge
-    type: merge
-    next: wait_after_merge
-
-  # End — terminal step (no next, no with)
-  - uuid: journey_end
-    type: end
-
-  # Jump — jump to a step in another stage
-  - uuid: jump_to_nurture
-    type: jump
-    next: nurture_stage_entry
-```
-
-Key rules:
-- Use `uuid` (not `id` or `name`) as the step identifier — this is the value referenced by `next` and branch targets.
-- `next` goes on the step itself (not inside `with`).
-- `end` steps have no `next` and no `with`.
-- The first step in the array is the root step (entry point) unless `root_step` is set on the stage.
-
-**Segment rule format**:
-```yaml
-segment_name:
-  description: Human-readable description
-  rule:
-    type: And
-    conditions:
-      - type: Value
-        attribute: attribute_name
-        operator:
-          type: Equal | GreaterEqual | LessEqual | TimeWithinPast | ...
-          value: "value"
-```
-
-**Activation format**:
-```yaml
-activation_name:
-  name: Human-readable name
-  connection: Connection Name
-  all_columns: true
-  run_after_journey_refresh: true
-  connector_config:
-    de_name: DataExtensionName
-    data_operation: upsert
-```
-
-**Flow control rules**:
-- Every branch must perform a different action (otherwise don't branch)
-- Multiple paths must converge through a Merge step (not directly to End)
-- A wait step must follow every activation step (via merge is OK)
-- End step has no `next` and no `with`
-- Decision point = fixed delay then check; condition wait = react immediately with timeout
-- The "excluded" branch is the catch-all and needs no segment
-- Condition wait paths must lead to different actions (otherwise use duration wait)
 
 ### Step 4: Journey Refinement
 
