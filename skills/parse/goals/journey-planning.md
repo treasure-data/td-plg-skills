@@ -125,8 +125,6 @@ Generate a `.journey.yaml` file with the high-level structure only (Follow instr
 - 2 stage names with entry criteria only (no steps yet). Step 3 can expand to more stages if the journey type warrants it.
 - Use the channels selected in Step 1
 
-Call `mcp__tas__open_file` to display the `.journey.yaml`file. Let the user know: "I've created an initial journey diagram — this is a live diagram that will update as we build out the flow."
-
 **Update the journey plan brief:** Add a `## Journey Structure` section to the `[journey-name]-plan.md` file:
 
 ```markdown
@@ -140,7 +138,7 @@ Call `mcp__tas__open_file` to display the `.journey.yaml`file. Let the user know
 - **Goal segment:** [goal segment definition from YAML]
 ```
 
-Check off "Generate journey structure" in Next Steps. Update the `[journey-name]-plan.md` file and call `mcp__tas__open_file` to refresh it.
+Check off "Generate journey structure" in Next Steps. Update the `[journey-name]-plan.md` file.
 
 Then immediately proceed to Step 3 (no confirmation needed).
 
@@ -160,7 +158,7 @@ Flow: [Send Email] → [Wait 3 Days] → Decision(Opened/Not Opened)
       Not Opened → [SMS Reminder] → Merge
 ```
 
-After adding all stages, update the YAML file and call `mcp__tas__open_file` so the user sees the complete diagram. Run the event count check (max 8 stages, 120 events/journey, 70 events/stage).
+After adding all stages, update the `.journey.YAML` file (use `reference/journey_design_reference.md` as technical guide) and call `mcp__tas__open_file` so the user sees the complete diagram. Run the event count check (max 8 stages, 120 events/journey, 70 events/stage).
 
 **Update the journey plan brief:** Add a `## Stage Details` section to the `[journey-name]-plan.md` file:
 
@@ -231,7 +229,7 @@ After submission:
 - Update the journey's goal segment to reflect the success metric.
 - Adjust all wait step durations to match the selected pacing.
 - Add exit criteria or a final fallback branch based on non-responder handling.
-- Update the `.journey.yaml` and call `mcp__tas__open_file` to show the refined diagram.
+- Update the `.journey.yaml` and call `mcp__tas__open_file` to show the refined diagram. Use `reference/journey_design_reference.md` as technical guide.
 
 **Update the journey plan brief:** Add a `## Journey Configuration` section to the `[journey-name]-plan.md` file:
 
@@ -290,11 +288,8 @@ When the user selects "I'm done for now":
 
 
 ## Behavior
-- **Living brief** — generate the journey plan brief early (after Step 1) and update it progressively after each step. The user should always have a current artifact reflecting everything gathered so far. The brief complements the `.journey.yaml` — the YAML is the technical/visual artifact rendered as a diagram, while the brief is the human-readable strategic document.
+- **Living brief** — generate the journey plan brief early (after Step 1) and update it progressively after each step. The user should always have a current artifact reflecting everything gathered so far.
 - **Use AskUserQuestion with `layout: 'form'` for the setup step** — do NOT split journey type, audience, and channels into sequential single questions.
 - Use the `defaultValue` and `defaultOtherText` fields to pre-fill sensible defaults so the user can accept or adjust.
-- **Present the journey plan stage by stage**, not concept by concept. Users think about the customer experience (what happens at each stage), not CDP technical categories (segments vs. activations).
-- **Explain concepts briefly inline** where they first appear — assume the user is new to CDP journey orchestration. Don't front-load all explanations before the plan.
-- Keep journey plans practical — max 8 stages, clear decision logic, realistic wait times.
-- When designing segments, use industry-appropriate attributes and realistic thresholds.
-- This is PLANNING ONLY — do NOT run `tdx journey push` or any other `tdx` CLI commands.
+- **Present the journey plan stage by stage**, not concept by concept. Users think about the customer experience (what happens at each stage), not technical categories (segments vs. activations).
+- Use `reference/journey_design_reference.md` as technical guide fr building journey
