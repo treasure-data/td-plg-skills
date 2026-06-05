@@ -1,13 +1,59 @@
 #### Technical reference for journey design
 
+**Journey-level structure**:
+```yaml
+type: journey           # optional
+name: Journey Name
+description: ...
+reentry: no_reentry | reentry_unless_goal_achieved | reentry_always
+goal:                   # CriteriaDef object — NOT a bare segment key
+  name: Goal Name
+  segment: goal_segment_key
+segments: { ... }
+activations: { ... }
+stages: [ ... ]         # flat format
+# OR versioned format:
+journeys:
+  - state: draft
+    goal: { name: ..., segment: ... }
+    stages: [ ... ]
+```
+
+**CriteriaDef format** (shared by `goal`, `entry_criteria`, `milestone`, `exit_criteria`):
+```yaml
+name: Human-readable name    # required
+segment: segment_key         # required — key from segments: section
+target:                      # optional — jump to another journey
+  journey: Other Journey
+  stage: Stage Name
+```
+
+**Stage fields**:
+```yaml
+stages:
+  - name: "Stage 1: Welcome"
+    entry_criteria:       # CriteriaDef — who enters this stage
+      name: New Signups
+      segment: new_signups
+    milestone:            # CriteriaDef — who graduates to next stage
+      name: Email Engaged
+      segment: email_engaged
+    exit_criteria:        # CriteriaDef[] — who gets removed (churned)
+      - name: Churned Users
+        segment: churned_users
+    steps: [ ... ]
+```
+Key rule: Stage 2+ `entry_criteria` typically reuses the previous stage's `milestone` segment.
+
 **Step types**: `activation`, `wait`, `decision_point`, `ab_test`, `merge`, `end`, `jump`
 
-**Step format** — every step uses `uuid` as its identifier and nests type-specific properties under `with`:
+**Step format** — every step has a `name` (display label) and `uuid` (identifier for `next`/branch references), and nests type-specific properties under `with`:
 ```yaml
 steps:
   # Activation — sends a message or triggers an action
   - uuid: send_welcome_email
     type: activation
+    name: Send Welcome Email
     with:
       activation: welcome_email_activation
     next: wait_for_open
@@ -15,6 +61,7 @@ steps:
   # Wait — pause for a fixed duration
   - uuid: wait_for_open
     type: wait
+    name: Wait 3 Days
     with:
       duration: 3
       unit: day
@@ -23,12 +70,14 @@ steps:
   # Wait — pause until a condition is met (no duration)
   - uuid: wait_for_purchase
     type: wait
+    name: Wait for Purchase
     with:
       condition: purchased_segment
 
   # Decision point — branch on segment membership
   - uuid: check_opened
     type: decision_point
+    name: Email Open Check
     with:
       branches:
         - name: opened
@@ -41,6 +90,7 @@ steps:
   # A/B test — split traffic by percentage
   - uuid: test_subject_line
     type: ab_test
+    name: Subject Line Test
     with:
       variants:
         - name: variant_a
@@ -53,15 +103,18 @@ steps:
   # Merge — converge multiple branches
   - uuid: post_branch_merge
     type: merge
+    name: Merge Branches
     next: wait_after_merge
 
   # End — terminal step (no next, no with)
   - uuid: journey_end
     type: end
+    name: Journey End
 
   # Jump — jump to a step in another stage
   - uuid: jump_to_nurture
     type: jump
+    name: Jump to Nurture
     next: nurture_stage_entry
 ```
 
