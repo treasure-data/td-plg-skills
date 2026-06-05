@@ -158,7 +158,7 @@ Flow: [Send Email] → [Wait 3 Days] → Decision(Opened/Not Opened)
       Not Opened → [SMS Reminder] → Merge
 ```
 
-After adding all stages, update the `.journey.YAML` file (use `reference/journey_design_reference.md` as technical guide) and call `mcp__tas__open_file` so the user sees the complete diagram. Run the event count check (max 8 stages, 120 events/journey, 70 events/stage).
+After adding all stages, update the `.journey.YAML` file (use `reference/journey_design_reference.md` as technical guide). Run the event count check (max 8 stages, 120 events/journey, 70 events/stage). Do not call `mcp__tas__open_file` here — the diagram will be rendered in Step 4 right before the user is asked for input.
 
 **Update the journey plan brief:** Add a `## Stage Details` section to the `[journey-name]-plan.md` file:
 
@@ -229,7 +229,7 @@ After submission:
 - Update the journey's goal segment to reflect the success metric.
 - Adjust all wait step durations to match the selected pacing.
 - Add exit criteria or a final fallback branch based on non-responder handling.
-- Update the `.journey.yaml` and call `mcp__tas__open_file` to show the refined diagram. Confirm journey yaml schema using `reference/journey_design_reference.md` as technical guide.
+- Update the `.journey.yaml`. Confirm journey yaml schema using `reference/journey_design_reference.md` as technical guide.
 
 **Update the journey plan brief:** Add a `## Journey Configuration` section to the `[journey-name]-plan.md` file:
 
@@ -240,7 +240,9 @@ After submission:
 - **Non-Responder Handling:** [selected fallback] — [description of what happens]
 ```
 
-Check off "Define success metrics and pacing" in Next Steps and update it
+Check off "Define success metrics and pacing" in Next Steps and update it.
+
+Call `mcp__tas__open_file` to show the journey diagram right before presenting the Step 5 refinement options — this ensures the artifact panel renders while the user reads the question.
 
 If "Other" is selected, ask one free-text follow-up for the metric definition.
 
@@ -258,7 +260,7 @@ Generate 2-3 contextual refinement suggestions based on what the journey current
 When the user selects a refinement option:
 - Apply the change to the `.journey.yaml`
 - **Update the `[journey-name]-plan.md`** to reflect the change in the relevant section (e.g., if an A/B test is added, update the affected stage in `## Stage Details`; if exit criteria are added, update `## Journey Configuration`)
-- Call `mcp__tas__open_file` to show the updated diagram
+- Call `mcp__tas__open_file` to show the updated diagram right before presenting the next round of refinement suggestions — this ensures the artifact panel renders while the user reads the question
 - Ask the next round of refinement suggestions (loop back to this step)
 
 When the user selects "I'm done for now":
