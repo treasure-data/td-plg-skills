@@ -30,6 +30,7 @@ The user's message fits a goal's description AND they're asking for the **artifa
 - "Build me a re-engagement journey for lapsed VIPs" → fits journey-planning, asks for the artifact.
 - "Find customers who bought twice in the last 30 days" → fits find-segment, asks for the artifact.
 - "Draft an email campaign for our spring sale" → fits campaign-planning, asks for the artifact.
+- Tell me about Treasure AI platform → fits learn-about-treasure-ai
 
 **Action:** invoke the matching goal directly (see Step 2). The goal flow collects industry / data source / output format itself.
 
@@ -40,7 +41,7 @@ The message fits a goal's description, but the user is asking **conceptually** (
 - "What is X?" / "What's a X?" / "Define X" — where X belongs to a goal's domain.
 - "What's the difference between X and Y?" / "X vs Y" / "How does X compare to Y?" — where X or Y belongs to a goal's domain.
 - "How do I think about X?" / "How should I approach X?" / "Why does X matter?"
-- Vague gestures: "I want to understand my customers better", "How do I bring people back?"
+- Vague gestures: "I want to understand my customers better", "How do I bring people back?", "Why should I buy Treasure AI?"
 
 **Action:**
 1. Answer the question briefly and clearly first (2–4 sentences).
@@ -212,13 +213,12 @@ Example (do not reuse verbatim): *If you'd like, I can run a quick analysis on t
 **Matches when** the user asks about Treasure AI itself — what it is, its features, capabilities, pricing, how it works, or how it compares to other CDPs or marketing tools. Any product-level question about the platform fits here.
 
 **Example phrasings:**
-- "What is Treasure AI?" / "What does this do?" / "What can you do?"
-- "How does this work?" / "How is this different from Segment?"
+- "What is Treasure AI?" / "Learn about marketing platform" / "What can you do?"
 - "Is this free?" / "How does pricing work?" / "What plan do I need?"
-- "What's a CDP?" / "What is AI Studio?"
-- "What features do you have?" / "Can you do X?"
+- "What's a CDP?" / "What is AI Studio?" / "Tell me about Treasure Voice"
+- "What features do you have?" / "Can you do X?" 
 
-**Strong-intent signal:** none — this goal is always Medium or dispatched from None.
+**Strong-intent signal:** Ask to learn about specific Treasure AI features, pricing, or competitor
 
 **Nudge:** Generate a single italicized sentence offering to show Treasure AI's capabilities with a hands-on demo. Vary the wording each time — use the current message context to make the offer feel natural and specific. Keep it warm and non-pushy ("if you'd like", "just say the word", "just ask").
 
