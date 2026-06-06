@@ -4,7 +4,7 @@ Plan a journey in multiple steps. Setup via FormCard, generate a skeleton YAML, 
 
 User does NOT have permission make any changes to the CDP data. No segments, activations, or journeys will be created, modified, or deleted. 
 
-## Workflow
+## Step 0: Setup
 
 1. **Greet the user** — write a brief, natural greeting that reflects what the user actually asked for. Mirror their language and energy. Be concise and action-oriented. Do not use a canned phrase — tailor the greeting to their specific request.
 
@@ -51,9 +51,7 @@ User does NOT have permission make any changes to the CDP data. No segments, act
    - If default data: use pre-loaded sample datasets. Briefly describe the data tables the user has access to — list each table name with a one-line description of what it contains. Keep it concise (no column details yet).
    - If upload: remind the user to upload via the "+" icon in the chat window and wait for the file attachment before proceeding. If data is already uploaded, use that. Avoid personal or confidential data.
 
-3. **Five steps**: Setup (FormCard) → Skeleton YAML → Build out stages → Refine outcomes → Summary & journey plan brief.
-
-### Step 1: Journey Setup
+## Step 1: Journey Setup and Brief Generation
 
 Briefly explain what a customer journey is and what we need to configure (1–2 sentences): *"A customer journey is an automated sequence of messages and actions triggered by customer behavior. We'll define who enters it and which channels to use."*
 
@@ -83,64 +81,19 @@ After submission, if "Other" is selected, ask one free-text follow-up for the sc
 
 After collecting all Step 1 inputs, generate an initial journey plan as a markdown file named `[journey-name]-plan.md`. The journey name should be auto-generated from the type + industry + audience (e.g., `retail-welcome-new-signups-plan.md`). 
 
-Follow instruction from `reference/journey_design_reference.md` for `.journey.yaml` file generation.
-
-The initial `.md` file should contain:
-
-```markdown
-# [Journey Name] — Journey Plan
-
-## Next Steps
-- [ ] Generate journey structure
-- [ ] Build out stage details
-- [ ] Define success metrics and pacing
-- [ ] Finalize journey plan
-
-## Overview
-- **Journey Type:** [selected journey type]
-- **Industry:** [selected industry]
-- **Data Source:** [selected data source]
-- **Target Audience:** [audience description from free-text input]
-- **Channels:** [comma-separated list of selected channels]
-
-## Industry Context
-[1–2 sentences on industry-specific journey orchestration context]
-
-## Journey Strategy
-[2–3 sentences outlining the strategic direction based on journey type + industry + audience]
-
----
-*Draft generated during journey planning. This document will be updated as we design the journey stages and refine the plan.*
-```
+The initial `.md` file should follow the outline in `reference/journey_plan_reference`, starting with the `## Next Steps` checklist through `## Journey Strategy`. End with a draft footer.
 
 Write this file to the working directory and call `mcp__tas__open_file` to display it. Tell the user: "I've created an initial journey plan. We'll update it as we design the stages and refine the journey."
 
 Then proceed to Step 2.
 
-### Step 2: Journey Skeleton YAML
+## Step 2: General Journey Skeleton YAML
 
-Generate a `.journey.yaml` file with the high-level structure only (Follow instruction from `reference/journey_design_reference.md` for `.journey.yaml` file generation.). Start simple, 2 stages:
+Generate a `.journey.yaml` file with the high-level structure only (Follow instruction from `reference/journey_design_reference.md` for `.journey.yaml` file generation.). Start simple, 2 to 3 stages:
 - Journey name (auto-generated from type + industry + audience)
-- Description, goal segment definition
-- 2 stage names with entry criteria only (no steps yet). Step 3 can expand to more stages if the journey type warrants it.
-- Use the channels selected in Step 1
+- Description, goal segment definition, channels
 
-**Update the journey plan brief:** Add a `## Journey Structure` section to the `[journey-name]-plan.md` file:
-
-```markdown
-## Journey Structure
-- **Journey name:** [auto-generated name from YAML]
-- **Number of stages:** [count]
-- **Stage overview:**
-  1. **[Stage 1 Name]** — [entry criteria summary]
-  2. **[Stage 2 Name]** — [entry criteria summary]
-
-- **Goal segment:** [goal segment definition from YAML]
-```
-
-Check off "Generate journey structure" in Next Steps. Update the `[journey-name]-plan.md` file.
-
-Then immediately proceed to Step 3 (no confirmation needed).
+Immediately proceed to Step 3 (no confirmation needed).
 
 ### Step 3: Build Out Stages
 
@@ -160,25 +113,7 @@ Flow: [Send Email] → [Wait 3 Days] → Decision(Opened/Not Opened)
 
 After adding all stages, update the `.journey.YAML` file (use `reference/journey_design_reference.md` as technical guide). Run the event count check (max 8 stages, 120 events/journey, 70 events/stage). Do not call `mcp__tas__open_file` here — the diagram will be rendered in Step 4 right before the user is asked for input.
 
-**Update the journey plan brief:** Add a `## Stage Details` section to the `[journey-name]-plan.md` file:
-
-```markdown
-## Stage Details
-
-### Stage 1: [Stage Name]
-- **Entry criteria:** [criteria]
-- **Flow:** [flow sketch, e.g., Send Email → Wait 3 Days → Decision(Opened/Not Opened) → ...]
-- **Activations:** [list of activation steps with channel and purpose]
-- **Exit to next stage:** [milestone criteria]
-
-### Stage 2: [Stage Name]
-- **Entry criteria:** [criteria]
-- **Flow:** [flow sketch]
-- **Activations:** [list of activation steps]
-- **Exit criteria:** [exit/completion criteria]
-
-[Repeat for each stage]
-```
+**Update the journey plan brief:** Add a `## Stage Details` section to the `[journey-name]-plan.md` file. Follow the outline in `reference/journey_plan_reference` for the `## Stage Details` section.
 
 Then immediately proceed to Step 4.
 
@@ -231,18 +166,7 @@ After submission:
 - Add exit criteria or a final fallback branch based on non-responder handling.
 - Update the `.journey.yaml`. Confirm journey yaml schema using `reference/journey_design_reference.md` as technical guide.
 
-**Update the journey plan brief:** Add a `## Journey Configuration` section to the `[journey-name]-plan.md` file:
-
-```markdown
-## Journey Configuration
-- **Success Metric:** [selected metric] — [brief description of what this means for the journey]
-- **Pacing:** [selected pacing] — [specific wait durations applied, e.g., "3-day waits between touchpoints"]
-- **Non-Responder Handling:** [selected fallback] — [description of what happens]
-```
-
-Check off "Define success metrics and pacing" in Next Steps and update it.
-
-Call `mcp__tas__open_file` to show the journey diagram right before presenting the Step 5 refinement options — this ensures the artifact panel renders while the user reads the question.
+Call `mcp__tas__open_file` to show the journey diagram right before presenting the refinements.
 
 If "Other" is selected, ask one free-text follow-up for the metric definition.
 
@@ -265,20 +189,17 @@ When the user selects a refinement option:
 
 When the user selects "I'm done for now":
 - **Finalize the journey plan brief:** Update the `[journey-name]-plan.md` file:
+  - Add a `## Journey Structure` section to the `[journey-name]-plan.md` file. Follow the outline in `reference/journey_plan_reference` for the `## Journey Structure` section.
+  - Add a `## Journey Configuration` section to the `[journey-name]-plan.md` file. Follow the outline in `reference/journey_plan_reference` for the `## Journey Configuration` section.
   - Add a `## Design Decisions` section summarizing the key design rationale (branching logic, channel selection, pacing choices).
   - If any refinements were applied during the loop, ensure they are reflected in the relevant sections (e.g., A/B tests in Stage Details, suppression rules in Journey Configuration).
-  - Replace the `## Next Steps` checklist with:
-
-    ```markdown
-    ## Status
-    Journey plan complete. All stages, activations, and configurations are documented above.
-    ```
+  - Replace the `## Next Steps` checklist with `## Status` as defined in `reference/journey_plan_reference`.
 
   - Update the footer to:
 
     ```markdown
     ---
-    *Journey plan finalized during guided planning flow. This is for demo purposes only — no changes have been made to any data or environment.*
+    *Journey plan finalized during guided planning flow.*
     ```
 
 - Send a closing message. Mention the journey plan and diagram are ready and can be refined or shared with their team. Note the full Treasure AI platform unifies CDP + journey orchestration + activation — invite them to talk to sales for the full experience. Keep warm and concise (3 sentences, no bullets/headers).

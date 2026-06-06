@@ -1,0 +1,58 @@
+#### Reference: Journey Plan Brief outline
+
+# [Journey Name] — Journey Plan
+
+## Next Steps
+- [ ] Generate journey structure
+- [ ] Build out stage details
+- [ ] Define success metrics and pacing
+- [ ] Finalize journey plan
+
+Replaced by `## Status` when finalized.
+
+## Overview
+- **Journey Type:** [selected journey type]
+- **Industry:** [selected industry]
+- **Data Source:** [selected data source]
+- **Target Audience:** [audience description from free-text input]
+- **Channels:** [comma-separated list of selected channels]
+
+## Industry Context
+[1–2 sentences on industry-specific journey orchestration context]
+
+## Journey Strategy
+[2–3 sentences outlining the strategic direction based on journey type + industry + audience]
+
+## Journey Structure
+- **Journey name:** [auto-generated name from YAML]
+- **Number of stages:** [count]
+- **Stage overview:**
+  1. **[Stage 1 Name]** — [criteria summary]
+  2. **[Stage 2 Name]** — [criteria summary]
+- **Goal segment:** [goal segment definition from YAML]
+
+## Stage Details
+
+### Stage 1: [Stage Name]
+- **Entry criteria:** [criteria]
+- **Flow:** [flow sketch, e.g., Send Email → Wait 3 Days → Decision(Opened/Not Opened) → ...]
+- **Activations:** [list of activation steps with channel and purpose]
+- **Exit to next stage:** [milestone criteria]
+
+### Stage 2: [Stage Name]
+- **Entry criteria:** [criteria]
+- **Flow:** [flow sketch]
+- **Activations:** [list of activation steps]
+- **Exit criteria:** [exit/completion criteria]
+
+## Journey Configuration
+- **Success Metric:** [selected metric] — [brief description of what this means for the journey]
+- **Pacing:** [selected pacing] — [specific wait durations applied, e.g., "3-day waits between touchpoints"]
+- **Non-Responder Handling:** [selected fallback] — [description of what happens]
+
+## Design Decisions
+[Summary of key design rationale — branching logic, channel selection, pacing choices]
+
+## Status
+Journey plan complete. All stages, activations, and configurations are documented above.
+(Replaces Next Steps when finalized)
