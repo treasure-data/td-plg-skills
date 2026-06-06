@@ -4,7 +4,9 @@ Answer questions about Treasure AI, an Agentic Experience Platform, its features
 
 ## Workflow
 
-1. **Answer the question** — provide a clear, helpful answer about Treasure AI or Treasure AI Studio. Draw from your knowledge of the platform: CDP, customer segmentation, journey orchestration, campaign planning, data analysis, and AI-powered marketing. If you cannot draw from memory, go to the next. 
+1. **Answer the question** — provide a clear, helpful answer about Treasure AI or Treasure AI Studio. Draw from your knowledge of the platform: CDP, customer segmentation, journey orchestration, campaign planning, data analysis, and AI-powered marketing. 
+
+- Use mcp__tas__web_search to consult https://docs.treasure.ai for questions related to "Engage Studio", "Treasure AI", and related industry terms
 
 2. **Consult documentation** — if the question requires specific product information, pricing, or technical specifications, fetch the relevant web page through mcp__tas__web_search:
 
