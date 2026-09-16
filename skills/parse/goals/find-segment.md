@@ -72,7 +72,7 @@ User does NOT have permission make any changes to the CDP data. No segments will
 
    This brief is a **living document** — update it progressively in subsequent steps as more information is gathered.
 
-4. **Explore data + suggest criteria** — based on the segmentation goal, explore the available data to understand what columns and distributions exist. Then suggest 1–3 concrete segment criteria **grounded in the actual data** (e.g., "Customers with 3+ orders" only if an `order_count` column exists with meaningful distribution). Present:
+4. **Explore data + suggest segment definition** — based on the segmentation goal, explore the available data to understand what columns and distributions exist. Then suggest 1–3 concrete segment definition **grounded in the actual data** (e.g., "Customers with 3+ orders" only if an `order_count` column exists with meaningful distribution). Present:
    - A brief summary of the relevant data (tables, key columns, row counts)
    - 1–3 suggested segment definitions with rule logic (attributes, operators, values) derived from the data
    - Any data quality notes the user should be aware of
@@ -93,7 +93,7 @@ User does NOT have permission make any changes to the CDP data. No segments will
 
    **Update the brief (final):** add `## Activation Ideas` with suggested campaigns/journeys. Replace the Next Steps checklist with a completion note. Update the footer to mark the brief as finalized. Open the completed brief with `mcp__tdx-studio__open_file`.
 
-7. **Ask about interactive dashboard** — use AskUserQuestion (single-select) to ask if the user wants a visual dashboard:
+7. **Ask about interactive dashboard** — ALWAYS use AskUserQuestion (single-select) to ask if the user wants a visual dashboard:
 
    - Header: "Dashboard"
    - Question: "Would you like an interactive dashboard for this segment?"
